@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { StatusBar } from "expo-status-bar";
 import {
   SafeAreaView,
   View,
@@ -14,18 +15,30 @@ import {
   Keyboard,
 } from "react-native";
 
+// ------------------------------------------------------------------
+const initialState = {
+  name: "",
+  email: "",
+  password: "",
+};
+// ------------------------------------------------------------------
 export const FormRegistration = () => {
-  const [text, onChangeText] = useState("");
-  const [mail, onChangeMail] = useState("");
-  const [password, onChangePassword] = useState("");
+  const [state, setState] = useState(initialState);
+  //   const [text, onChangeText] = useState("");
+  //   const [mail, onChangeMail] = useState("");
+  //   const [password, onChangePassword] = useState("");
   const [isSecureEntry, setIsSecureEntry] = useState(true);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  console.log(isShowKeyboard);
   //   const [isShowBtn, setIsShowBtn] = useState(true);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
+    console.log(setIsShowKeyboard);
     // setIsShowBtn(true);
     Keyboard.dismiss();
+    console.log(state);
+    setState(initialState);
   };
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
@@ -34,10 +47,10 @@ export const FormRegistration = () => {
           style={styles.image}
           source={require("../assets/images/bg-montaine.jpeg")}
         >
-          <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-          >
-            <View style={styles.containerWhite}>
+          <View style={styles.containerWhite}>
+            <KeyboardAvoidingView
+              behavior={Platform.OS === "ios" ? "padding" : "height"}
+            >
               {/* //! ---------------- контейнер: form ---------------- */}
               <View
                 style={{
@@ -51,24 +64,30 @@ export const FormRegistration = () => {
                 <Text style={styles.text}>Реєстрація!</Text>
                 <TextInput
                   style={styles.input}
-                  placeholder="Логін"
-                  onChangeText={onChangeText}
+                  placeholder={"Логін"}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, name: value }))
+                  }
                   onFocus={() => setIsShowKeyboard(true)}
-                  value={text}
+                  value={state.name}
                 />
                 <TextInput
                   style={styles.input}
-                  placeholder="Адреса електроної пошти"
-                  onChangeText={onChangeMail}
+                  placeholder={"Адреса електроної пошти"}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, email: value }))
+                  }
                   onFocus={() => setIsShowKeyboard(true)}
-                  value={mail}
+                  value={state.email}
                 />
                 <TextInput
                   style={styles.input}
-                  placeholder="Пароль"
-                  onChangeText={onChangePassword}
+                  placeholder={"Пароль"}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, password: value }))
+                  }
                   onFocus={() => setIsShowKeyboard(true)}
-                  value={password}
+                  value={state.password}
                   secureTextEntry={isSecureEntry}
                   iconPosition="right"
                   // secureTextEntry={true}
@@ -95,8 +114,10 @@ export const FormRegistration = () => {
                   <Text style={styles.btnTitleLogin}>Вже є акаунт? Увійти</Text>
                 </TouchableOpacity>
               </View>
-            </View>
-          </KeyboardAvoidingView>
+            </KeyboardAvoidingView>
+          </View>
+
+          <StatusBar style="auto" />
         </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
@@ -127,7 +148,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     // marginTop: 263,
     marginBottom: 0,
-    // justifyContent: "flex-end",
+    justifyContent: "flex-end",
   },
   form: {
     // marginBottom: 62,
