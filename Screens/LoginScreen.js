@@ -9,9 +9,9 @@ import {
   Text,
   Platform,
   KeyboardAvoidingView,
-  Dimensions,
+  //   Dimensions,
   Pressable,
-  Image,
+  //   Image,
 } from "react-native";
 
 const initialState = {
@@ -22,52 +22,59 @@ const initialState = {
 export const LoginForm = () => {
   const [state, setState] = useState(initialState);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+
   const [type, setType] = useState(false);
-  const handleClick = () => setType("text");
+  const onPressFunction = () => setType("text");
 
-  const [image, setImage] = useState(null);
-  const addImage = () => {};
+  //   const [image, setImage] = useState(null);
+  //   const addImage = () => {};
 
-  const [dimensions, setDimensions] = useState(
-    Dimensions.get("window").width - 8 * 2
-  );
+  //   const [dimensions, setDimensions] = useState(
+  //     Dimensions.get("window").width - 8 * 2
+  //   );
 
-  useEffect(() => {
-    onchange = () => {
-      const width = Dimensions.get("window").width - 8 * 2;
-      setDimensions(width);
-    };
-    Dimensions.addEventListener("change", onchange);
-    return () => {
-      Dimensions.removeEventListener("change", onchange);
-    };
-  }, []);
+  //   useEffect(() => {
+  //     onchange = () => {
+  //       const width = Dimensions.get("window").width - 8 * 2;
+  //       setDimensions(width);
+  //     };
+  //     Dimensions.addEventListener("change", onchange);
+  //     return () => {
+  //       Dimensions.removeEventListener("change", onchange);
+  //     };
+  //   }, []);
 
-  const KeyboardHide = () => {
+  const keyboardHide = () => {
+    setIsShowKeyboard(false);
     Keyboard.dismiss();
     console.log(state);
     setState(initialState);
   };
+  const keyboardHideAndSubmit = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+    console.log("Login Form state:", state);
+  };
 
   return (
-    <TouchableWithoutFeedback onPress={KeyboardHide}>
+    <TouchableWithoutFeedback onPress={keyboardHide}>
       <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
       >
-        <View style={styles.form}>
+        <View style={styles.containerWhite}>
           <View
             onLayout={() => setIsShowKeyboard(true)}
             style={{
-              ...styles.inputForm,
+              ...styles.form,
               marginBottom: isShowKeyboard ? 110 : 150,
-              width: dimensions,
+              //   width: dimensions,
             }}
           >
             <Text style={styles.title}>Увійти</Text>
 
             <TextInput
               style={styles.input}
-              placeholder={"Адрес электронной почты"}
+              placeholder={"Адресa електронної пошти"}
               value={state.email}
               onChangeText={(value) =>
                 setState((prevState) => ({ ...prevState, email: value }))
@@ -88,11 +95,15 @@ export const LoginForm = () => {
                 onFocus={() => setIsShowKeyboard(true)}
               />
 
-              <Pressable style={styles.show} onPress={handleClick}>
+              <Pressable style={styles.show} onPress={ onPressFunction}>
                 <Text style={styles.showText}>Показати</Text>
               </Pressable>
             </View>
-            <TouchableOpacity activeOpacity={0.8} style={styles.button}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={styles.btn}
+              onPress={() => keyboardHideAndSubmit()}
+            >
               <Text style={styles.btnTitle}>Увійти</Text>
             </TouchableOpacity>
             <Text style={styles.text}>Немa акаунта? Зареєструватися</Text>
@@ -104,7 +115,7 @@ export const LoginForm = () => {
 };
 
 const styles = StyleSheet.create({
-  form: {
+  containerWhite: {
     backgroundColor: "#FFFFFF",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -137,7 +148,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     fontFamily: "Roboto-Regular",
   },
-  button: {
+  btn: {
     backgroundColor: "#FF6C00",
     marginTop: 43,
     height: 51,
@@ -152,7 +163,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Roboto-Regular",
   },
-  inputForm: {
+  form: {
     marginBottom: 110,
   },
   show: {

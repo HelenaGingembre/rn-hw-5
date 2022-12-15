@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
-  SafeAreaView,
   View,
   StyleSheet,
   ImageBackground,
@@ -13,6 +12,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Pressable,
 } from "react-native";
 
 // ------------------------------------------------------------------
@@ -24,13 +24,19 @@ const initialState = {
 // ------------------------------------------------------------------
 export const FormRegistration = () => {
   const [state, setState] = useState(initialState);
-  //   const [text, onChangeText] = useState("");
-  //   const [mail, onChangeMail] = useState("");
-  //   const [password, onChangePassword] = useState("");
+
   const [isSecureEntry, setIsSecureEntry] = useState(true);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   console.log(isShowKeyboard);
   //   const [isShowBtn, setIsShowBtn] = useState(true);
+
+  const [type, setType] = useState(false);
+   
+    const onPressFunction = () => {
+        // setIsSecureEntry(false);
+//  console.log("IsSecureEntry", isSecureEntry);
+        setType("text");
+    };
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -40,6 +46,13 @@ export const FormRegistration = () => {
     console.log(state);
     setState(initialState);
   };
+
+  const keyboardHideAndSubmit = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+    console.log("Registratio Form state:", state);
+  };
+
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container}>
@@ -73,26 +86,35 @@ export const FormRegistration = () => {
                 />
                 <TextInput
                   style={styles.input}
-                  placeholder={"Адреса електроної пошти"}
+                  placeholder={"Адреса електронної пошти"}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, email: value }))
                   }
                   onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
                 />
-                <TextInput
-                  style={styles.input}
-                  placeholder={"Пароль"}
-                  onChangeText={(value) =>
-                    setState((prevState) => ({ ...prevState, password: value }))
-                  }
-                  onFocus={() => setIsShowKeyboard(true)}
-                  value={state.password}
-                  secureTextEntry={isSecureEntry}
-                  iconPosition="right"
-                  // secureTextEntry={true}
-                  // secureTextEntry={this.props.isSecure ? this.props.isSecure : false}
-                />
+                <View style={styles.inputSection}>
+                  <TextInput
+                    style={styles.inputPassword}
+                    placeholder={"Пароль"}
+                    onChangeText={(value) =>
+                      setState((prevState) => ({
+                        ...prevState,
+                        password: value,
+                      }))
+                    }
+                    onFocus={() => setIsShowKeyboard(true)}
+                    value={state.password}
+                    // secureTextEntry={isSecureEntry}
+                    // iconPosition="right"
+                  />
+                  <Pressable
+                    style={styles.show}
+                    onPress={onPressFunction}
+                  >
+                    <Text style={styles.showText}>Показати</Text>
+                  </Pressable>
+                </View>
                 {/* //! ---------- Кнопка: Зареєструватися -------- */}
                 <TouchableOpacity
                   activeOpacity={0.8}
@@ -102,6 +124,7 @@ export const FormRegistration = () => {
                   //   visibility: isShowBtn ? "visible" : "hidden",
                   // }}
                   style={styles.btn}
+                  onPress={() => keyboardHideAndSubmit()}
                 >
                   <Text style={styles.btnTitle}>Зареєструватися</Text>
                 </TouchableOpacity>
@@ -187,6 +210,33 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6F6F6",
     borderRadius: 8,
     color: "#BDBDBD",
+    },
+   show: {
+    position: "absolute",
+    right: 100,
+    transform: [{ translateX: 100 }],
+    padding: 16,
+  },
+  inputSection: {
+    position: "relative",
+    height: 50,
+    marginBottom: 16,
+    backgroundColor: "#F6F6F6",
+    borderColor: "#E8E8E8",
+    borderWidth: 1,
+    padding: 16,
+    borderRadius: 8,
+    color: "#212121",
+    fontFamily: "Roboto-Regular",
+    justifyContent: "center",
+    alignItems: "baseline",
+    },
+  inputPassword: {
+    position: "absolute",
+    padding: 16,
+    },
+  showText: {
+    color: "#1B4371",
   },
   btn: {
     height: 51,
