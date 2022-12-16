@@ -8,7 +8,8 @@ import {
   Keyboard,
   Text,
   Platform,
-  KeyboardAvoidingView,
+    KeyboardAvoidingView,
+  ImageBackground,
   //   Dimensions,
   Pressable,
   //   Image,
@@ -58,18 +59,21 @@ export const LoginForm = () => {
 
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
-      <KeyboardAvoidingView
+    
+               <View style={styles.container}>
+        <ImageBackground
+          style={styles.image}
+          source={require("../assets/images/bg-montaine.jpeg")}
+        >
+              <View style={styles.containerWhite}>
+                    <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
-      >
-        <View style={styles.containerWhite}>
-          <View
-            onLayout={() => setIsShowKeyboard(true)}
-            style={{
-              ...styles.form,
-              marginBottom: isShowKeyboard ? 110 : 150,
-              //   width: dimensions,
-            }}
           >
+          <View style={{
+              ...styles.form,
+              marginBottom: isShowKeyboard ? 0 : 128,
+                              //   width: dimensions, 
+                          }} >
             <Text style={styles.title}>Увійти</Text>
 
             <TextInput
@@ -107,28 +111,47 @@ export const LoginForm = () => {
               <Text style={styles.btnTitle}>Увійти</Text>
             </TouchableOpacity>
             <Text style={styles.text}>Немa акаунта? Зареєструватися</Text>
-          </View>
-        </View>
-      </KeyboardAvoidingView>
+                      </View>
+                      </KeyboardAvoidingView>
+              </View>
+              </ImageBackground>
+       </View>
     </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
+    container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    fontFamily: "Roboto",
+    fontStyle: "normal",
+    fontWeight: 400,
+    fontSize: 16,
+    lineHeight: 19,
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "flex-end",
+  },
   containerWhite: {
-    backgroundColor: "#FFFFFF",
+    // flex: 1,
+    backgroundColor: "#fff",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    alignItems: "center",
-    position: "relative",
+    bottom: 0,
+    // marginTop: 323,
+    marginBottom: 0,
+      justifyContent: "flex-end",
   },
-  title: {
+   title: { 
     marginTop: 32,
     marginBottom: 33,
     textAlign: "center",
     fontSize: 30,
     color: "#212121",
-    fontFamily: "Roboto-Medium",
+    fontFamily: "Roboto",
   },
   input: {
     height: 50,
@@ -139,14 +162,14 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     color: "#212121",
-    fontFamily: "Roboto-Regular",
+    fontFamily: "Roboto",
   },
   text: {
     color: "#1B4371",
     fontSize: 16,
     textAlign: "center",
     marginTop: 16,
-    fontFamily: "Roboto-Regular",
+    fontFamily: "Roboto",
   },
   btn: {
     backgroundColor: "#FF6C00",
@@ -161,10 +184,9 @@ const styles = StyleSheet.create({
   btnTitle: {
     color: "#FFFFFF",
     fontSize: 16,
-    fontFamily: "Roboto-Regular",
   },
   form: {
-    marginBottom: 110,
+    marginHorizontal: 16,
   },
   show: {
     position: "absolute",
@@ -181,10 +203,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 16,
     borderRadius: 8,
-    color: "#212121",
-    fontFamily: "Roboto-Regular",
-
-    justifyContent: "center",
+      color: "#212121",
+      justifyContent: "center",
     alignItems: "baseline",
   },
   inputPassword: {
