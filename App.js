@@ -26,7 +26,7 @@ export default function App() {
     //   </ImageBackground>
     // </View>
 
-    // <FormRegistration />
-    <LoginForm />
+    <FormRegistration />
+    // <LoginForm />
   );
 }

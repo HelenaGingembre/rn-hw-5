@@ -8,7 +8,7 @@ import {
   Keyboard,
   Text,
   Platform,
-    KeyboardAvoidingView,
+  KeyboardAvoidingView,
   ImageBackground,
   //   Dimensions,
   Pressable,
@@ -60,20 +60,13 @@ export const LoginForm = () => {
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
     
-               <View style={styles.container}>
+     <View style={styles.container}>
         <ImageBackground
           style={styles.image}
-          source={require("../assets/images/bg-montaine.jpeg")}
-        >
+          source={require("../assets/images/bg-montaine.jpeg")}>
               <View style={styles.containerWhite}>
-                    <KeyboardAvoidingView
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
-          >
-          <View style={{
-              ...styles.form,
-              marginBottom: isShowKeyboard ? 0 : 128,
-                              //   width: dimensions, 
-                          }} >
+                    <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"}>
+          <View style={{ ...styles.form, marginBottom: isShowKeyboard ? 0 : 128,}}>
             <Text style={styles.title}>Увійти</Text>
 
             <TextInput
@@ -83,7 +76,6 @@ export const LoginForm = () => {
               onChangeText={(value) =>
                 setState((prevState) => ({ ...prevState, email: value }))
               }
-              autoCapitalize={"none"}
               onFocus={() => setIsShowKeyboard(true)}
             />
             <View style={styles.inputSection}>
@@ -110,11 +102,19 @@ export const LoginForm = () => {
             >
               <Text style={styles.btnTitle}>Увійти</Text>
             </TouchableOpacity>
-            <Text style={styles.text}>Немa акаунта? Зареєструватися</Text>
+                              {/* //! ---------- Кнопка: Немa акаунта? Зареєструватися -------- */}
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => null}
+                  style={styles.btnLogin}
+                >
+                  <Text style={styles.btnTitleLogin}>Немa акаунта? Зареєструватися</Text>
+                </TouchableOpacity>
+           
                       </View>
-                      </KeyboardAvoidingView>
-              </View>
-              </ImageBackground>
+                </KeyboardAvoidingView>
+            </View>
+         </ImageBackground>
        </View>
     </TouchableWithoutFeedback>
   );
@@ -184,6 +184,13 @@ const styles = StyleSheet.create({
   btnTitle: {
     color: "#FFFFFF",
     fontSize: 16,
+    },
+  btnLogin: {
+    color: "#1B4371",
+    paddingTop: 16,
+    paddingBottom: 16,
+    alignItems: "center",
+    justifyContent: "center",
   },
   form: {
     marginHorizontal: 16,
@@ -192,7 +199,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 100,
     transform: [{ translateX: 100 }],
-    padding: 16,
+      padding: 16,
+    width:71,
   },
   inputSection: {
     position: "relative",

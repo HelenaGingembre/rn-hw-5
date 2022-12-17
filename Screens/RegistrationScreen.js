@@ -28,7 +28,7 @@ export const FormRegistration = () => {
   const [isSecureEntry, setIsSecureEntry] = useState(true);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   console.log(isShowKeyboard);
-  //   const [isShowBtn, setIsShowBtn] = useState(true);
+    // const [isShowBtn, setIsShowBtn] = useState(true);
 
   const [type, setType] = useState(false);
    
@@ -39,18 +39,21 @@ export const FormRegistration = () => {
     };
 
   const keyboardHide = () => {
-    setIsShowKeyboard(false);
+      setIsShowKeyboard(false);
+    //  setIsShowBtn(true);
     console.log(setIsShowKeyboard);
-    // setIsShowBtn(true);
+
     Keyboard.dismiss();
-    console.log(state);
+      console.log(state);
+    //   setIsShowBtn(false);
     setState(initialState);
   };
 
   const keyboardHideAndSubmit = () => {
     setIsShowKeyboard(false);
-    Keyboard.dismiss();
-    console.log("Registratio Form state:", state);
+      Keyboard.dismiss();
+        // setIsShowBtn(true);
+    console.log("Registration Form state:", state);
   };
 
   return (
@@ -90,20 +93,22 @@ export const FormRegistration = () => {
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, email: value }))
                   }
-                  onFocus={() => setIsShowKeyboard(true)}
+                                  onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
                 />
                 <View style={styles.inputSection}>
                   <TextInput
                     style={styles.inputPassword}
-                    placeholder={"Пароль"}
+                                      placeholder={"Пароль"}
+                       type={type}                
+                secureTextEntry={type ? false : true}
                     onChangeText={(value) =>
                       setState((prevState) => ({
                         ...prevState,
                         password: value,
                       }))
                     }
-                    onFocus={() => setIsShowKeyboard(true)}
+                                      onFocus={() => setIsShowKeyboard(true)}
                     value={state.password}
                     // secureTextEntry={isSecureEntry}
                     // iconPosition="right"
@@ -118,7 +123,7 @@ export const FormRegistration = () => {
                 {/* //! ---------- Кнопка: Зареєструватися -------- */}
                 <TouchableOpacity
                   activeOpacity={0.8}
-                  //   onFocus={() => setIsShowBtn(true)}
+                  
                   // style={{
                   //   ...styles.btn,
                   //   visibility: isShowBtn ? "visible" : "hidden",
@@ -138,7 +143,7 @@ export const FormRegistration = () => {
                 </TouchableOpacity>
               </View>
             </KeyboardAvoidingView>
-          </View>
+        </View>
 
           <StatusBar style="auto" />
         </ImageBackground>
@@ -215,7 +220,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 100,
     transform: [{ translateX: 100 }],
-    padding: 16,
+       padding: 16,
+    // width:71,
   },
   inputSection: {
     position: "relative",
@@ -227,7 +233,6 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     color: "#212121",
-    fontFamily: "Roboto-Regular",
     justifyContent: "center",
     alignItems: "baseline",
     },
