@@ -58,9 +58,8 @@ export const LoginForm = () => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={keyboardHide}>
-    
-     <View style={styles.container}>
+      <TouchableWithoutFeedback onPress={keyboardHide}>
+          <View style={styles.container}>
         <ImageBackground
           style={styles.image}
           source={require("../assets/images/bg-montaine.jpeg")}>
@@ -69,8 +68,7 @@ export const LoginForm = () => {
           <View style={{ ...styles.form, marginBottom: isShowKeyboard ? 0 : 128,}}>
             <Text style={styles.title}>Увійти</Text>
 
-            <TextInput
-              style={styles.input}
+            <TextInput style={styles.input}
               placeholder={"Адресa електронної пошти"}
               value={state.email}
               onChangeText={(value) =>
@@ -111,7 +109,7 @@ export const LoginForm = () => {
                   <Text style={styles.btnTitleLogin}>Немa акаунта? Зареєструватися</Text>
                 </TouchableOpacity>
            
-                      </View>
+          </View>
                 </KeyboardAvoidingView>
             </View>
          </ImageBackground>
