@@ -10,9 +10,7 @@ import {
   Platform,
   KeyboardAvoidingView,
   ImageBackground,
-  //   Dimensions,
   Pressable,
-  //   Image,
 } from "react-native";
 
 const initialState = {
@@ -62,10 +60,10 @@ export const LoginForm = () => {
           <View style={styles.container}>
         <ImageBackground
           style={styles.image}
-          source={require("../assets/images/bg-montaine.jpeg")}>
+          source={require("../../assets/images/bg-montaine.jpeg")}>
               <View style={styles.containerWhite}>
                     <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"}>
-          <View style={{ ...styles.form, marginBottom: isShowKeyboard ? 0 : 128,}}>
+          <View style={{ ...styles.form, marginBottom: isShowKeyboard ? 0 : 128}}>
             <Text style={styles.title}>Увійти</Text>
 
             <TextInput style={styles.input}

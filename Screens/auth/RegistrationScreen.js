@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   View,
@@ -13,55 +13,85 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Pressable,
+  Dimensions,
 } from "react-native";
-
+// import { useFonts } from 'expo-font';
+// import * as Font from 'expo-font';
+// import {AppLoading} from "expo";
 // ------------------------------------------------------------------
 const initialState = {
   name: "",
   email: "",
   password: "",
 };
+
+// const  loadApplication= async()=> {
+//     await Font.loadAsync({
+//     'Roboto-Bold': require('../../assets/fonts/Roboto/Roboto-Bold.ttf'),
+//     'Roboto-Regular': require('../../assets/fonts/Roboto/Roboto-Regular.ttf'),
+//     });
+//   };
 // ------------------------------------------------------------------
 export const FormRegistration = () => {
   const [state, setState] = useState(initialState);
+  // const [iasReady, setIasReady] = useState(false);
+  const [dimensions, setDimensions] = useState(Dimensions.get('window').width-20*2);
+  useEffect(() => {
+    onChange = () => {
+      const width = Dimensions.get('window').width-20*2;
+      console.log("width:", width);
+    };
+    Dimensions.addEventListener("change", onChange);
+    return () => {
+      Dimensions.removeEventListner("change", onChange);
+    }
+  }, []);
 
-  const [isSecureEntry, setIsSecureEntry] = useState(true);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   console.log(isShowKeyboard);
-    // const [isShowBtn, setIsShowBtn] = useState(true);
 
   const [type, setType] = useState(false);
    
-    const onPressFunction = () => {
-        // setIsSecureEntry(false);
-//  console.log("IsSecureEntry", isSecureEntry);
-        setType("text");
+  const onPressFunction = () => {
+      if(type!="text"){
+        setType("text"); 
+      } else {
+        setType(false);
+    }
+    // console.log(type);
     };
 
   const keyboardHide = () => {
       setIsShowKeyboard(false);
-    //  setIsShowBtn(true);
     console.log(setIsShowKeyboard);
 
     Keyboard.dismiss();
       console.log(state);
-    //   setIsShowBtn(false);
-    setState(initialState);
-  };
+      setState(initialState);
+  }; 
 
   const keyboardHideAndSubmit = () => {
     setIsShowKeyboard(false);
       Keyboard.dismiss();
-        // setIsShowBtn(true);
     console.log("Registration Form state:", state);
   };
+  
+  // if (!iasReady) {
+  //   return (
+  //     <AppLoading
+  //       startAsync={loadApplication}
+  //       onFinish={() => setIasReady(true)}
+  //       onError={console.log("error loading fonts")}
+  //     />
+  //   );
+  // }
 
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container}>
         <ImageBackground
           style={styles.image}
-          source={require("../assets/images/bg-montaine.jpeg")}
+          source={require("../../assets/images/bg-montaine.jpeg")}
         >
           <View style={styles.containerWhite}>
             <KeyboardAvoidingView
@@ -72,6 +102,7 @@ export const FormRegistration = () => {
                 style={{
                   ...styles.form,
                   marginBottom: isShowKeyboard ? 0 : 62,
+                  width: dimensions,
                 }}
               >
                 <View style={styles.avatar}>
@@ -93,25 +124,19 @@ export const FormRegistration = () => {
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, email: value }))
                   }
-                                  onFocus={() => setIsShowKeyboard(true)}
+                  onFocus={() => setIsShowKeyboard(true)}
                   value={state.email}
                 />
                 <View style={styles.inputSection}>
                   <TextInput
                     style={styles.inputPassword}
-                                      placeholder={"Пароль"}
-                       type={type}                
-                secureTextEntry={type ? false : true}
+                    placeholder={"Пароль"}
+                   type={type}                
+                    secureTextEntry={type ? false : true}
                     onChangeText={(value) =>
-                      setState((prevState) => ({
-                        ...prevState,
-                        password: value,
-                      }))
-                    }
-                                      onFocus={() => setIsShowKeyboard(true)}
+                    setState((prevState) => ({ ...prevState, password: value }))}
+                    onFocus={() => setIsShowKeyboard(true)}
                     value={state.password}
-                    // secureTextEntry={isSecureEntry}
-                    // iconPosition="right"
                   />
                   <Pressable
                     style={styles.show}
@@ -123,11 +148,6 @@ export const FormRegistration = () => {
                 {/* //! ---------- Кнопка: Зареєструватися -------- */}
                 <TouchableOpacity
                   activeOpacity={0.8}
-                  
-                  // style={{
-                  //   ...styles.btn,
-                  //   visibility: isShowBtn ? "visible" : "hidden",
-                  // }}
                   style={styles.btn}
                   onPress={() => keyboardHideAndSubmit()}
                 >
@@ -143,7 +163,7 @@ export const FormRegistration = () => {
                 </TouchableOpacity>
               </View>
             </KeyboardAvoidingView>
-        </View>
+          </View>
 
           <StatusBar style="auto" />
         </ImageBackground>
@@ -165,21 +185,18 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    // justifyContent: "center",
     justifyContent: "flex-end",
+    alignItems: "center",
   },
   containerWhite: {
-    // flex: 1,
     backgroundColor: "#fff",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     bottom: 0,
-    // marginTop: 263,
     marginBottom: 0,
     justifyContent: "flex-end",
   },
   form: {
-    // marginBottom: 62,
     marginHorizontal: 16,
   },
   avatar: {
@@ -196,12 +213,11 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#212121",
-    fontSize: 30,
+    fontFamily: "Roboto",
+    fontSize:30,
     fontWeight: "500",
     textAlign: "center",
     letterSpacing: 0.01,
-    // marginLeft: 80,
-    // marginRight: 79,
     marginBottom: 33,
   },
   input: {
@@ -220,8 +236,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 100,
     transform: [{ translateX: 100 }],
-       padding: 16,
-    // width:71,
+    padding: 16,
   },
   inputSection: {
     position: "relative",
