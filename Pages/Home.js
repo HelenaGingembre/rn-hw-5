@@ -1,18 +1,101 @@
 import React from 'react';
-import { Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, StyleSheet } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-export const Home = () => {
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Ionicons, Feather, AntDesign } from '@expo/vector-icons';
+
+import { PostsScreen } from './PostsScreen';
+import { CreatePostsScreen } from './CreatePostsScreen';
+import { ProfileScreen } from './ProfileScreen';
+
+const Tabs = createBottomTabNavigator();
+
+export const Home = ({ navigation }) => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.titleHeader}>Публiкацii</Text>
-            {/* //! ------------- контейнер: photoFrame ------------ */}
-            <View style={styles.photoFrame}></View>
-            <Text style={styles.text}>Вже є акаунт? Увійти</Text>
-            <Text style={styles.text}>Вже є акаунт? Увійти</Text>
-        </View>
+        // <View style={styles.container}>
+        //     <Text style={styles.titleHeader}>Публiкацii</Text>
+        //     {/* //! ------------- контейнер: photoFrame ------------ */}
+        //     <View
+        //         style={styles.photoFrame}
+        //         source={require('../assets/images/avatar.png')}
+        //     ></View>
+        //     <Text style={styles.textUsername}>Natali Romanova</Text>
+        //     <Text style={styles.textEmail}>email@example.com</Text>
+        // </View>
+        <Tabs.Navigator
+            initialRouteName="PostsScreen"
+            screenOptions={{
+                tabBarShowLabel: false,
+                tabBarStyle: [{ display: 'flex' }, null],
+                tabBarStyle: {
+                    paddingHorizontal: 50,
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    height: 60,
+                },
+            }}
+        >
+            <Tabs.Screen
+                name="PostsScreen"
+                component={PostsScreen}
+                options={{
+                    headerShown: true,
+                    headerTitleStyle: { marginLeft: 160 },
+                    headerRight: () => (
+                        <TouchableOpacity
+                            style={{ marginRight: 20 }}
+                            onPress={() => {
+                                navigation.navigate('Login');
+                            }}
+                        >
+                            <Ionicons
+                                name="md-exit-outline"
+                                size={24}
+                                color="#BDBDBD"
+                            />
+                        </TouchableOpacity>
+                    ),
+                    tabBarIcon: ({ focused, size, color }) => (
+                        // <Feather name="grid" size={24} color="black" />
+                        <Feather name="grid" size={size} color={color} />
+                    ),
+                    tabBarActiveTintColor: '#ff6c00',
+                    tabBarInactiveTintColor: '#BDBDBD',
+                }}
+            />
+            <Tabs.Screen
+                name="CreatePostsScreen"
+                component={CreatePostsScreen}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: ({ focused, size, color }) => (
+                        <AntDesign
+                            name="pluscircle"
+                            size={size}
+                            color={color}
+                        />
+                    ),
+                    tabBarActiveTintColor: '#fff',
+                    tabBarInactiveTintColor: '#BDBDBD',
+                    tabBarItemStyle: {
+                        backgroundColor: '#FF6C00',
+                        borderRadius: 20,
+                    },
+                }}
+            />
+            <Tabs.Screen
+                name="ProfileScreen"
+                component={ProfileScreen}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: ({ focused, size, color }) => (
+                        <AntDesign name="user" size={size} color={color} />
+                    ),
+                    tabBarActiveTintColor: '#FF6C00',
+                    tabBarInactiveTintColor: '#BDBDBD',
+                }}
+            />
+        </Tabs.Navigator>
     );
 };
 
@@ -36,5 +119,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#F6F6F6',
         marginTop: -60,
         borderRadius: 16,
+    },
+    textUsername: {
+        fontWeight: 700,
+        fontSize: 13,
+        lineHeight: 15,
+        display: 'flex',
+        alignItems: 'center',
+    },
+    textEmail: {
+        fontWeight: 400,
+        fontSize: 11,
+        lineHeight: 13,
+        display: 'flex',
+        alignItems: 'center',
     },
 });
