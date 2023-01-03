@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons, Feather, AntDesign } from '@expo/vector-icons';
+import { Feather, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 import { PostsScreen } from './PostsScreen';
 import { CreatePostsScreen } from './CreatePostsScreen';
@@ -12,18 +12,8 @@ const Tabs = createBottomTabNavigator();
 
 export const Home = ({ navigation }) => {
     return (
-        // <View style={styles.container}>
-        //     <Text style={styles.titleHeader}>Публiкацii</Text>
-        //     {/* //! ------------- контейнер: photoFrame ------------ */}
-        //     <View
-        //         style={styles.photoFrame}
-        //         source={require('../assets/images/avatar.png')}
-        //     ></View>
-        //     <Text style={styles.textUsername}>Natali Romanova</Text>
-        //     <Text style={styles.textEmail}>email@example.com</Text>
-        // </View>
         <Tabs.Navigator
-            initialRouteName="PostsScreen"
+            initialRouteName="Posts"
             screenOptions={{
                 tabBarShowLabel: false,
                 tabBarStyle: [{ display: 'flex' }, null],
@@ -36,10 +26,11 @@ export const Home = ({ navigation }) => {
             }}
         >
             <Tabs.Screen
-                name="PostsScreen"
+                name="Posts"
                 component={PostsScreen}
                 options={{
                     headerShown: true,
+                    title: 'Публiкацii',
                     headerTitleStyle: { marginLeft: 160 },
                     headerRight: () => (
                         <TouchableOpacity
@@ -48,15 +39,14 @@ export const Home = ({ navigation }) => {
                                 navigation.navigate('Login');
                             }}
                         >
-                            <Ionicons
-                                name="md-exit-outline"
+                            <MaterialIcons
+                                name="logout"
                                 size={24}
                                 color="#BDBDBD"
                             />
                         </TouchableOpacity>
                     ),
                     tabBarIcon: ({ focused, size, color }) => (
-                        // <Feather name="grid" size={24} color="black" />
                         <Feather name="grid" size={size} color={color} />
                     ),
                     tabBarActiveTintColor: '#ff6c00',
@@ -64,9 +54,10 @@ export const Home = ({ navigation }) => {
                 }}
             />
             <Tabs.Screen
-                name="CreatePostsScreen"
+                name="CreatePosts"
                 component={CreatePostsScreen}
                 options={{
+                    title: 'Cтворити Публiкацii',
                     headerShown: false,
                     tabBarIcon: ({ focused, size, color }) => (
                         <AntDesign
@@ -84,7 +75,7 @@ export const Home = ({ navigation }) => {
                 }}
             />
             <Tabs.Screen
-                name="ProfileScreen"
+                name="Profile"
                 component={ProfileScreen}
                 options={{
                     headerShown: false,
@@ -104,34 +95,5 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    titleHeader: {
-        fontWeight: '500',
-        fontSize: 17,
-        lineHeight: 1.29,
-        textAlign: 'center',
-        letterSpacing: -0.408,
-        color: '#212121',
-    },
-    photoFrame: {
-        width: 60,
-        height: 60,
-        backgroundColor: '#F6F6F6',
-        marginTop: -60,
-        borderRadius: 16,
-    },
-    textUsername: {
-        fontWeight: 700,
-        fontSize: 13,
-        lineHeight: 15,
-        display: 'flex',
-        alignItems: 'center',
-    },
-    textEmail: {
-        fontWeight: 400,
-        fontSize: 11,
-        lineHeight: 13,
-        display: 'flex',
-        alignItems: 'center',
     },
 });
