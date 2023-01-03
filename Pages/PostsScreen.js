@@ -49,39 +49,4 @@ const styles = StyleSheet.create({
         paddingTop: 30,
         paddingHorizontal: 16,
     },
-
-    // container: {
-    //     flex: 1,
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    // },
-    // titleHeader: {
-    //     fontWeight: '500',
-    //     fontSize: 17,
-    //     lineHeight: 1.29,
-    //     textAlign: 'center',
-    //     letterSpacing: -0.408,
-    //     color: '#212121',
-    // },
-    // photoFrame: {
-    //     width: 60,
-    //     height: 60,
-    //     backgroundColor: '#F6F6F6',
-    //     marginTop: -60,
-    //     borderRadius: 16,
-    // },
-    // textUsername: {
-    //     fontWeight: 700,
-    //     fontSize: 13,
-    //     lineHeight: 15,
-    //     display: 'flex',
-    //     alignItems: 'center',
-    // },
-    // textEmail: {
-    //     fontWeight: 400,
-    //     fontSize: 11,
-    //     lineHeight: 13,
-    //     display: 'flex',
-    //     alignItems: 'center',
-    // },
 });
