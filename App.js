@@ -13,8 +13,8 @@ import { useRoute } from './router';
 export default function App() {
     console.log(Platform.OS);
 
-    // const routing = useRoute(true);
-    const routing = useRoute({});
+    const routing = useRoute(true);
+    // const routing = useRoute({});
 
     const [fontsLoaded] = useFonts({
         'Roboto-Bold': require('./assets/fonts/Roboto/Roboto-Bold.ttf'),
