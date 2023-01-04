@@ -36,16 +36,17 @@ export const useRoute = isAuth => {
                     name="Login"
                     component={Login}
                 />
-                <AuthStack.Screen name="Home" component={Home} />
+                <AuthStack.Screen
+                    component={Home}
+                    name="Posts"
+                    options={{ headerTitleAlign: 'center' }}
+                />
             </AuthStack.Navigator>
         );
     }
     return (
         <MainTabs.Navigator
             initialRouteName="Posts"
-            // tabBarOptions={{
-            //     showLabel: false,
-            // }}
             screenOptions={{
                 tabBarShowLabel: false,
                 tabBarStyle: [{ display: 'flex' }, null],
@@ -62,22 +63,8 @@ export const useRoute = isAuth => {
                 component={PostsScreen}
                 options={{
                     headerShown: true,
+                    tabBarShowLabel: false,
                     headerTitleStyle: { marginLeft: 160 },
-                    headerRight: () => (
-                        <TouchableOpacity
-                            style={{ marginRight: 20 }}
-                            onPress={() => {
-                                navigation.navigate('Login');
-                            }}
-                        >
-                            <MaterialIcons
-                                name="logout"
-                                size={24}
-                                color="#BDBDBD"
-                            />
-                        </TouchableOpacity>
-                    ),
-
                     tabBarIcon: ({ focused, size, color }) => (
                         <Feather
                             name="grid"
@@ -94,6 +81,7 @@ export const useRoute = isAuth => {
                 component={CreatePostsScreen}
                 options={{
                     headerShown: true,
+                    tabBarShowLabel: false,
                     tabBarIcon: ({ focused, size, color }) => (
                         <AntDesign
                             name="pluscircle"
@@ -115,6 +103,7 @@ export const useRoute = isAuth => {
                 component={ProfileScreen}
                 options={{
                     headerShown: false,
+                    tabBarShowLabel: false,
                     tabBarIcon: ({ focused, size, color }) => (
                         <AntDesign
                             style={focused && styles.focusNav}

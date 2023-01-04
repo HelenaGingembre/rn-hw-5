@@ -8,7 +8,7 @@ export const User = () => {
                 source={require('../assets/images/avatar.png')}
             />
             <View style={styles.userText}>
-                <Text style={styles.name}>Natali Romanova</Text>
+                <Text style={styles.name}>Olena Gingembre</Text>
                 <Text style={styles.email}>email@example.com</Text>
             </View>
         </View>
@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     name: {
-        fontFamily: 'Roboto-Bold',
+        fontFamily: 'Roboto',
         fontSize: 13,
-
+        fontWeight: 700,
         color: '#212121',
     },
     email: {
-        fontFamily: 'Roboto-Regular',
+        fontFamily: 'Roboto',
         fontSize: 11,
 
         color: '#rgba(33, 33, 33, 0.8)',

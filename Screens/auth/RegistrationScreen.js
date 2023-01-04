@@ -67,7 +67,7 @@ export const Registration = ({ navigation }) => {
     const keyboardHideAndSubmit = () => {
         setIsShowKeyboard(false);
         Keyboard.dismiss();
-        navigation.navigate('Home');
+
         console.log('Registration Form state:', state);
     };
     return (
@@ -150,7 +150,10 @@ export const Registration = ({ navigation }) => {
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     style={styles.btn}
-                                    onPress={() => keyboardHideAndSubmit()}
+                                    onPress={() => {
+                                        keyboardHideAndSubmit();
+                                        navigation.navigate('Posts');
+                                    }}
                                 >
                                     <Text style={styles.btnTitle}>
                                         Зареєструватися

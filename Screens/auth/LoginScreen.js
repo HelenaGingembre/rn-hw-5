@@ -52,7 +52,7 @@ export const Login = ({ navigation }) => {
     const keyboardHideAndSubmit = () => {
         setIsShowKeyboard(false);
         Keyboard.dismiss();
-        navigation.navigate('Home');
+
         console.log('Login Form state:', state);
     };
 
@@ -117,7 +117,10 @@ export const Login = ({ navigation }) => {
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     style={styles.btn}
-                                    onPress={() => keyboardHideAndSubmit()}
+                                    onPress={() => {
+                                        keyboardHideAndSubmit();
+                                        navigation.navigate('Posts');
+                                    }}
                                 >
                                     <Text style={styles.btnTitle}>Увійти</Text>
                                 </TouchableOpacity>

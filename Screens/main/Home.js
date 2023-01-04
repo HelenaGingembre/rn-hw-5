@@ -1,17 +1,18 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Feather, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 import { PostsScreen } from './PostsScreen';
-// import { CreatePostsScreen } from './CreatePostsScreen';
-// import { ProfileScreen } from './ProfileScreen';
+import { User } from '../../components/user';
 
-const Tabs = createBottomTabNavigator();
-
-export const Home = ({ navigation }) => {
-    return <PostsScreen></PostsScreen>;
+export const Home = () => {
+    return (
+        <View style={styles.container}>
+            {/* <User /> */}
+            <PostsScreen />
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({

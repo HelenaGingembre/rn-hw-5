@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { Feather } from '@expo/vector-icons';
+import { Feather, MaterialIcons } from '@expo/vector-icons';
 
 export const Header = ({ title, out }) => {
     return (
@@ -11,8 +11,8 @@ export const Header = ({ title, out }) => {
                 color={out ? '#FFF' : 'rgba(33, 33, 33, 0.8'}
             />
             <Text style={styles.headerText}>{title}</Text>
-            <Feather
-                name="log-out"
+            <MaterialIcons
+                name="logout"
                 size={20}
                 color={out ? '#BDBDBD' : '#FFF'}
             />

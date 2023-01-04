@@ -73,7 +73,7 @@ export const CreatePostsScreen = ({}) => {
                                 />
                             </View>
                             <View>
-                                {/* //! ---------- Кнопка: Зареєструватися -------- */}
+                                {/* //! ---------- Кнопка: Створити -------- */}
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     style={styles.btn}
