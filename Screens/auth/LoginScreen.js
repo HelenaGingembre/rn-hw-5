@@ -119,7 +119,7 @@ export const Login = ({ navigation }) => {
                                     style={styles.btn}
                                     onPress={() => {
                                         keyboardHideAndSubmit();
-                                        navigation.navigate('Posts');
+                                        navigation.navigate('Home');
                                     }}
                                 >
                                     <Text style={styles.btnTitle}>Увійти</Text>

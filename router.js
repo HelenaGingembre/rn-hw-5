@@ -38,8 +38,8 @@ export const useRoute = isAuth => {
                 />
                 <AuthStack.Screen
                     component={Home}
-                    name="Posts"
-                    options={{ headerTitleAlign: 'center' }}
+                    name="Home"
+                    options={{ headerTitleAlign: 'center', headerShown: false }}
                 />
             </AuthStack.Navigator>
         );
@@ -116,6 +116,11 @@ export const useRoute = isAuth => {
                     tabBarInactiveTintColor: '#BDBDBD',
                 }}
             />
+            {/* <MainTabs.Screen
+                component={Home}
+                name="Home"
+                options={{ headerTitleAlign: 'center', headerShown: false }}
+            /> */}
         </MainTabs.Navigator>
     );
 };

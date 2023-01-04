@@ -37,17 +37,10 @@ export default function App() {
     if (!fontsLoaded) {
         return null;
     }
-
+    onFontsLoaded();
     return (
-        <View style={styles.container} onLayout={onFontsLoaded}>
-            <NavigationContainer>{routing}</NavigationContainer>
-        </View>
+        // <View onLayout={onFontsLoaded}>
+        <NavigationContainer>{routing}</NavigationContainer>
+        // </View>
     );
 }
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        marginHorizontal: 16,
-    },
-});
