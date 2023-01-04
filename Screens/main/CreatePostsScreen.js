@@ -11,9 +11,9 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-import { FontAwesome5 } from '@expo/vector-icons';
+import { EvilIcons } from '@expo/vector-icons';
 
-import { Header } from '../components/header';
+import { Header } from '../../components/header';
 
 export const CreatePostsScreen = ({}) => {
     const [isKeyboardShow, setIsKeyboardShow] = useState(false);
@@ -39,9 +39,9 @@ export const CreatePostsScreen = ({}) => {
                                 activeOpacity={0.85}
                                 onPress={() => console.log('take a photo')}
                             >
-                                <FontAwesome5
+                                <EvilIcons
                                     name="camera"
-                                    size={20}
+                                    size={24}
                                     color="#BDBDBD"
                                 />
                             </TouchableOpacity>
@@ -71,6 +71,20 @@ export const CreatePostsScreen = ({}) => {
                                     placeholder="Місцевість"
                                     keyboardType="default"
                                 />
+                            </View>
+                            <View>
+                                {/* //! ---------- Кнопка: Зареєструватися -------- */}
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    style={styles.btn}
+                                    onPress={() => {
+                                        console.log('create post');
+                                    }}
+                                >
+                                    <Text style={styles.btnTitle}>
+                                        Створити публікцію
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
                         </KeyboardAvoidingView>
                     </View>
@@ -121,5 +135,18 @@ const styles = StyleSheet.create({
         height: 40,
         borderBottomWidth: 1,
         borderBottomColor: '#E8E8E8',
+    },
+    btn: {
+        height: 51,
+        marginTop: 27,
+        backgroundColor: '#FF6C00',
+        borderRadius: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    btnTitle: {
+        color: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });

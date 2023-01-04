@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState /*, useEffect*/ } from 'react';
 import {
     TouchableOpacity,
     StyleSheet,
@@ -18,7 +18,7 @@ const initialState = {
     password: '',
 };
 
-export const LoginForm = ({ navigation }) => {
+export const Login = ({ navigation }) => {
     const [state, setState] = useState(initialState);
     const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
@@ -52,6 +52,7 @@ export const LoginForm = ({ navigation }) => {
     const keyboardHideAndSubmit = () => {
         setIsShowKeyboard(false);
         Keyboard.dismiss();
+        navigation.navigate('Home');
         console.log('Login Form state:', state);
     };
 

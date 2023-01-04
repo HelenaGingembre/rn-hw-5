@@ -8,7 +8,7 @@ import {
     FlatList,
 } from 'react-native';
 
-import { Publication } from '../components/publications';
+import { Publication } from '../../components/publications';
 
 const POSTS = [
     {
@@ -16,28 +16,28 @@ const POSTS = [
         title: 'Dnipro',
         image: '../assets/images/post_2.png',
         comments: '',
-        location: '',
+        location: 'Dnipro, Ukraine',
     },
     {
         id: '4116-jfk5-43rh',
         title: 'Poltava',
         image: '../assets/images/post_1.png',
         comments: '',
-        location: '',
+        location: 'Poltava, Ukraine',
     },
     {
         id: '4d16-5tt5-4j55',
         title: 'Kyiv',
         image: '../assets/images/post_2.png',
         comments: '',
-        location: '',
+        location: 'Kyiv, Ukraine',
     },
     {
         id: 'LG16-ant5-0J25',
         title: 'Lviv',
         image: '../assets/images/post_1.png',
         comments: '',
-        location: '',
+        location: 'Lviv, Ukraine',
     },
 ];
 
@@ -48,7 +48,7 @@ export const ProfileScreen = ({}) => {
         <View style={styles.container}>
             <ImageBackground
                 style={styles.bgImg}
-                source={require('../assets/images/bg-montaine.jpeg')}
+                source={require('../../assets/images/bg-montaine.jpeg')}
             >
                 {/* <ScrollView></ScrollView> */}
                 <Text style={styles.publicationTitle}>PROFILE</Text>

@@ -1,24 +1,24 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 
-import { Header } from '../components/header';
-import { User } from '../components/user';
-import { Publication } from '../components/publications';
+import { Header } from '../../components/header';
+import { User } from '../../components/user';
+import { Publication } from '../../components/publications';
 
-import photo1 from '../assets/images/post_1.png';
-import photo2 from '../assets/images/post_2.png';
+import photo1 from '../../assets/images/post_1.png';
+import photo2 from '../../assets/images/post_2.png';
 
-export const PostsScreen = ({}) => {
+export const PostsScreen = () => {
     return (
         <View style={styles.container}>
-            {/* <Header title="Публікції" out={true} /> */}
+            <Header title="Публікції" out={true} />
             <ScrollView style={styles.main}>
                 <User />
                 <Publication
                     title={'Ліс'}
                     image={photo1}
                     comments={0}
-                    location={'Ivano-Frankivsk Region, Ukraine'}
+                    location={`Ivano-Frankivs'k Region, Ukraine`}
                 />
 
                 <Publication

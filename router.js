@@ -1,19 +1,51 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { StyleSheet, TouchableOpacity } from 'react-native';
+
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const AuthStack = createStackNavigator();
+const MainTabs = createBottomTabNavigator();
+
+import { Login } from './Screens/auth/LoginScreen';
+import { Registration } from './Screens/auth/RegistrationScreen';
+import { PostsScreen } from './Screens/main/PostsScreen';
+import { CreatePostsScreen } from './Screens/main/CreatePostsScreen';
+import { ProfileScreen } from './Screens/main/ProfileScreen';
+import { Home } from './Screens/main/Home';
+
+// icons import
 import { Feather, AntDesign, MaterialIcons } from '@expo/vector-icons';
 
-import { PostsScreen } from './PostsScreen';
-import { CreatePostsScreen } from './CreatePostsScreen';
-import { ProfileScreen } from './ProfileScreen';
-
-const Tabs = createBottomTabNavigator();
-
-export const Home = ({ navigation }) => {
+export const useRoute = isAuth => {
+    if (!isAuth) {
+        return (
+            <AuthStack.Navigator initialRouteName="Registration">
+                <AuthStack.Screen
+                    options={{
+                        headerShown: false,
+                    }}
+                    name="Registration"
+                    component={Registration}
+                />
+                <AuthStack.Screen
+                    options={{
+                        headerShown: false,
+                    }}
+                    name="Login"
+                    component={Login}
+                />
+                <AuthStack.Screen name="Home" component={Home} />
+            </AuthStack.Navigator>
+        );
+    }
     return (
-        <Tabs.Navigator
+        <MainTabs.Navigator
             initialRouteName="Posts"
+            // tabBarOptions={{
+            //     showLabel: false,
+            // }}
             screenOptions={{
                 tabBarShowLabel: false,
                 tabBarStyle: [{ display: 'flex' }, null],
@@ -25,12 +57,11 @@ export const Home = ({ navigation }) => {
                 },
             }}
         >
-            <Tabs.Screen
+            <MainTabs.Screen
                 name="Posts"
                 component={PostsScreen}
                 options={{
                     headerShown: true,
-                    title: 'Публiкацii',
                     headerTitleStyle: { marginLeft: 160 },
                     headerRight: () => (
                         <TouchableOpacity
@@ -46,23 +77,28 @@ export const Home = ({ navigation }) => {
                             />
                         </TouchableOpacity>
                     ),
+
                     tabBarIcon: ({ focused, size, color }) => (
-                        <Feather name="grid" size={size} color={color} />
+                        <Feather
+                            name="grid"
+                            style={focused && styles.focusNav}
+                            size={24}
+                            color={color}
+                        />
                     ),
-                    tabBarActiveTintColor: '#ff6c00',
-                    tabBarInactiveTintColor: '#BDBDBD',
+                    tabBarActiveTintColor: 'rgba(33, 33, 33, 0.8)',
                 }}
             />
-            <Tabs.Screen
+            <MainTabs.Screen
                 name="CreatePosts"
                 component={CreatePostsScreen}
                 options={{
-                    title: 'Cтворити Публiкацii',
                     headerShown: true,
                     tabBarIcon: ({ focused, size, color }) => (
                         <AntDesign
                             name="pluscircle"
-                            size={size}
+                            style={focused && styles.focusNav}
+                            size={24}
                             color={color}
                         />
                     ),
@@ -74,26 +110,33 @@ export const Home = ({ navigation }) => {
                     },
                 }}
             />
-            <Tabs.Screen
-                name="Profile"
+            <MainTabs.Screen
+                name="Profiler"
                 component={ProfileScreen}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused, size, color }) => (
-                        <AntDesign name="user" size={size} color={color} />
+                        <AntDesign
+                            style={focused && styles.focusNav}
+                            name="user"
+                            size={24}
+                            color={color}
+                        />
                     ),
                     tabBarActiveTintColor: '#FF6C00',
                     tabBarInactiveTintColor: '#BDBDBD',
                 }}
             />
-        </Tabs.Navigator>
+        </MainTabs.Navigator>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+    focusNav: {
+        paddingVertical: 7,
+        paddingHorizontal: 28,
+        borderRadius: 20,
+        backgroundColor: '#FF6C00',
+        color: '#fff',
     },
 });

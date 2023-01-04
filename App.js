@@ -7,9 +7,11 @@ import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
 import { Platform } from 'react-native';
-import { FormRegistration } from './Screens/auth/RegistrationScreen';
-import { LoginForm } from './Screens/auth/LoginScreen';
-import { Home } from './Pages/Home';
+import { Registration } from './Screens/auth/RegistrationScreen';
+import { Login } from './Screens/auth/LoginScreen';
+import { Home } from './Screens/main/Home';
+
+import { useRoute } from './router';
 
 const loadApplication = async () => {
     await Font.loadAsync({
@@ -18,11 +20,10 @@ const loadApplication = async () => {
     });
 };
 
-const MainStack = createStackNavigator(); // указывает на группу навигаторов
-
 export default function App() {
     console.log(Platform.OS);
     const [iasReady, setIasReady] = useState(false);
+    const routing = useRoute(1);
 
     if (!iasReady) {
         return (
@@ -33,25 +34,5 @@ export default function App() {
             />
         );
     }
-    return (
-        <NavigationContainer>
-            <MainStack.Navigator initialRouteName="Home">
-                {/* Замена Switch */}
-                <MainStack.Screen
-                    name="Registration"
-                    component={FormRegistration}
-                />
-                {/* Замена Route */}
-                <MainStack.Screen name="Login" component={LoginForm} />
-                <MainStack.Screen
-                    name="Home"
-                    component={Home}
-                    options={{ title: 'Публiкацii' }}
-                />
-            </MainStack.Navigator>
-        </NavigationContainer>
-
-        // <FormRegistration />
-        // <LoginForm />
-    );
+    return <NavigationContainer>{routing}</NavigationContainer>;
 }

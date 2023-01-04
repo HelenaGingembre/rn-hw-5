@@ -1,4 +1,5 @@
 import { StyleSheet, Image, Text, View } from 'react-native';
+import { EvilIcons } from '@expo/vector-icons';
 
 export const Publication = ({ title, image, comments, location }) => {
     return (
@@ -13,8 +14,14 @@ export const Publication = ({ title, image, comments, location }) => {
                     marginTop: 10,
                 }}
             >
-                <Text style={styles.comments}>{comments}</Text>
-                <Text style={styles.location}>{location}</Text>
+                <Text style={styles.comments}>
+                    <EvilIcons name="comment" size={24} color="#212121" />
+                    {comments}
+                </Text>
+                <Text style={styles.location}>
+                    <EvilIcons name="location" size={24} color="#212121" />
+                    {location}
+                </Text>
             </View>
         </View>
     );
@@ -28,6 +35,7 @@ const styles = StyleSheet.create({
     },
     img: {
         width: '100%',
+        height: 240,
         borderRadius: 8,
     },
     publicationTitle: {

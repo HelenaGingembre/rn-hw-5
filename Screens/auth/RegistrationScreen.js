@@ -24,7 +24,7 @@ const initialState = {
 };
 
 // ------------------------------------------------------------------
-export const FormRegistration = ({ navigation }) => {
+export const Registration = ({ navigation }) => {
     const [state, setState] = useState(initialState);
 
     const [dimensions, setDimensions] = useState(
@@ -67,6 +67,7 @@ export const FormRegistration = ({ navigation }) => {
     const keyboardHideAndSubmit = () => {
         setIsShowKeyboard(false);
         Keyboard.dismiss();
+        navigation.navigate('Home');
         console.log('Registration Form state:', state);
     };
     return (
