@@ -3,14 +3,19 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { PostsScreen } from '../Screens/main/PostsScreen';
 import { Login } from '../Screens/auth/LoginScreen';
+import { useNavigation } from '@react-navigation/native';
 
-export const Header = ({ title, out }) => {
+export const Header = ({ title, out, navigation: { navigate } }) => {
+    const navigation = useNavigation();
+
     return (
         <View style={styles.header}>
             <TouchableOpacity
                 activeOpacity={0.8}
                 style={styles.btn}
-                onPress={() => PostsScreen}
+                onPress={() => {
+                    navigation.goBack();
+                }}
             >
                 <Feather
                     name="arrow-left"
@@ -22,7 +27,7 @@ export const Header = ({ title, out }) => {
             <TouchableOpacity
                 activeOpacity={0.8}
                 style={styles.btn}
-                onPress={() => Login}
+                onPress={() => navigation.navigate(Login)}
             >
                 <MaterialIcons
                     name="logout"

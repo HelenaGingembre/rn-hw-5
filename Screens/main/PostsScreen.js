@@ -4,14 +4,15 @@ import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { Header } from '../../components/header';
 import { User } from '../../components/user';
 import { Publication } from '../../components/publications';
+import { Login } from '../../Screens/auth/LoginScreen';
 
 import photo1 from '../../assets/images/post_1.png';
 import photo2 from '../../assets/images/post_2.png';
 
-export const PostsScreen = () => {
+export const PostsScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            <Header title="Публікaції" out={true} />
+            <Header title="Публікaції" out={true} navigation={Login} />
             <ScrollView style={styles.main}>
                 <User />
                 <Publication
