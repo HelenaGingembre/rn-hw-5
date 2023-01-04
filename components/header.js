@@ -1,21 +1,35 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 import { Feather, MaterialIcons } from '@expo/vector-icons';
+import { PostsScreen } from '../Screens/main/PostsScreen';
+import { Login } from '../Screens/auth/LoginScreen';
 
 export const Header = ({ title, out }) => {
     return (
         <View style={styles.header}>
-            <Feather
-                name="arrow-left"
-                size={20}
-                color={out ? '#FFF' : 'rgba(33, 33, 33, 0.8'}
-            />
+            <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.btn}
+                onPress={() => PostsScreen}
+            >
+                <Feather
+                    name="arrow-left"
+                    size={20}
+                    color={out ? '#FFF' : 'rgba(33, 33, 33, 0.8'}
+                />
+            </TouchableOpacity>
             <Text style={styles.headerText}>{title}</Text>
-            <MaterialIcons
-                name="logout"
-                size={20}
-                color={out ? '#BDBDBD' : '#FFF'}
-            />
+            <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.btn}
+                onPress={() => Login}
+            >
+                <MaterialIcons
+                    name="logout"
+                    size={20}
+                    color={out ? '#BDBDBD' : '#FFF'}
+                />
+            </TouchableOpacity>
         </View>
     );
 };
@@ -23,14 +37,14 @@ export const Header = ({ title, out }) => {
 const styles = StyleSheet.create({
     header: {
         width: '100%',
-        height: 80,
+        // height: 88,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(0, 0, 0, 0.3)',
-        paddingTop: 27,
-        paddingBottom: 12,
+        paddingTop: 55,
+        paddingBottom: 11,
         backgroundColor: '#fff',
         paddingHorizontal: 16,
     },

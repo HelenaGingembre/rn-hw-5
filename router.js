@@ -62,7 +62,7 @@ export const useRoute = isAuth => {
                 name="Posts"
                 component={PostsScreen}
                 options={{
-                    headerShown: true,
+                    headerShown: false,
                     tabBarShowLabel: false,
                     headerTitleStyle: { marginLeft: 160 },
                     tabBarIcon: ({ focused, size, color }) => (
@@ -80,7 +80,7 @@ export const useRoute = isAuth => {
                 name="CreatePosts"
                 component={CreatePostsScreen}
                 options={{
-                    headerShown: true,
+                    headerShown: false,
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, size, color }) => (
                         <AntDesign
