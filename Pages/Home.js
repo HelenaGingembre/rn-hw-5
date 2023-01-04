@@ -58,7 +58,7 @@ export const Home = ({ navigation }) => {
                 component={CreatePostsScreen}
                 options={{
                     title: 'Cтворити Публiкацii',
-                    headerShown: false,
+                    headerShown: true,
                     tabBarIcon: ({ focused, size, color }) => (
                         <AntDesign
                             name="pluscircle"

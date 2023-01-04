@@ -33,9 +33,7 @@ const styles = StyleSheet.create({
     publicationTitle: {
         fontFamily: 'Roboto-Bold',
         fontSize: 16,
-
         marginTop: 8,
-
         color: '#212121',
     },
     comments: {
