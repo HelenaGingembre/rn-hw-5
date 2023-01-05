@@ -12,7 +12,7 @@ import photo2 from '../../assets/images/post_2.png';
 export const PostsScreen = ({}) => {
     return (
         <View style={styles.container}>
-            <Header title="Публікaції" out={true} />
+            {/* <Header title="Публікaції" out={true} /> */}
             <ScrollView style={styles.main}>
                 <User />
                 <Publication

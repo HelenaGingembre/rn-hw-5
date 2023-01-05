@@ -26,7 +26,7 @@ export const CreatePostsScreen = () => {
     return (
         <TouchableWithoutFeedback onPress={keyBoardHide}>
             <View style={styles.container}>
-                <Header title="Створити публікцію" />
+                {/* <Header title="Створити публікцію" /> */}
                 <ScrollView style={styles.main}>
                     <View
                         style={{

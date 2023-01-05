@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     name: {
         fontFamily: 'Roboto',
         fontSize: 13,
-        // fontWeight: 700,
+        fontWeight: 'bold',
         color: '#212121',
     },
     email: {

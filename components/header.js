@@ -14,7 +14,7 @@ export const Header = ({ title, out }) => {
                 activeOpacity={0.8}
                 style={styles.btn}
                 onPress={() => {
-                    navigation.goBack();
+                    out ? navigation.goBack() : null;
                 }}
             >
                 <Feather
@@ -29,7 +29,7 @@ export const Header = ({ title, out }) => {
                 style={styles.btn}
                 onPress={() => {
                     console.log('navigation', navigation);
-                    //navigation.goBack(Login);
+                    // navigation.navigate('Login');
                 }}
             >
                 <MaterialIcons
@@ -61,5 +61,15 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#212121;',
         letterSpacing: 1,
+    },
+    btn: {
+        width: 30,
+        height: 30,
+        borderRadius: 20,
+        backgroundColor: '#fff',
+        color: '#BDBDBD',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginHorizontal: 16,
     },
 });

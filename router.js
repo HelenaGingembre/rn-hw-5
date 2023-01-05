@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native';
 
 const AuthStack = createStackNavigator();
 const MainTabs = createBottomTabNavigator();
@@ -17,8 +18,15 @@ import { Home } from './Screens/main/Home';
 
 // icons import
 import { Feather, AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { GoToButton } from './components/goToButton';
+
+function TextTitle(text) {
+    return <Text style={styles.title}>{text}</Text>;
+}
 
 export const useRoute = isAuth => {
+    // const navigation = useNavigation();
+
     if (!isAuth) {
         return (
             <AuthStack.Navigator initialRouteName="Registration">
@@ -39,7 +47,7 @@ export const useRoute = isAuth => {
                 <AuthStack.Screen
                     component={Home}
                     name="Home"
-                    options={{ headerTitleAlign: 'center', headerShown: false }}
+                    // options={{ headerTitleAlign: 'center', headerShown: false }}
                 />
             </AuthStack.Navigator>
         );
@@ -56,15 +64,38 @@ export const useRoute = isAuth => {
                     paddingBottom: 10,
                     height: 60,
                 },
+                headerStyle: {
+                    borderBottomWidth: 1,
+                    borderBottomColor: 'rgba(0, 0, 0, 0.3)',
+                    backgroundColor: '#fff',
+                },
+                headerTitleAlign: 'center',
             }}
         >
             <MainTabs.Screen
                 name="Posts"
                 component={PostsScreen}
-                options={{
-                    headerShown: false,
+                options={({ navigation }) => ({
+                    headerTitle: () => TextTitle('Публікaції'),
+                    headerShown: true,
+                    headerRight: () => (
+                        <GoToButton screenName="Login" /> //TODO!!!
+                        /*  <TouchableOpacity
+                            activeOpacity={0.8}
+                            style={styles.btn}
+                            onPress={() => {
+                                //navigation.navigate('Login');
+                                // navigation.goBack();
+                            }}
+                        >
+                            <Feather
+                                name="arrow-left"
+                                size={20}
+                                color={'rgba(33, 33, 33, 0.8'}
+                            />
+                        </TouchableOpacity>*/
+                    ),
                     tabBarShowLabel: false,
-                    headerTitleStyle: { marginLeft: 160 },
                     tabBarIcon: ({ focused, size, color }) => (
                         <Feather
                             name="grid"
@@ -74,13 +105,31 @@ export const useRoute = isAuth => {
                         />
                     ),
                     tabBarActiveTintColor: 'rgba(33, 33, 33, 0.8)',
-                }}
+                })}
             />
             <MainTabs.Screen
                 name="CreatePosts"
                 component={CreatePostsScreen}
-                options={{
-                    headerShown: false,
+                options={({ navigation }) => ({
+                    headerShown: true,
+                    headerTitle: () => TextTitle('Створити публікцію'),
+                    headerLeft: () => (
+                        <GoToButton screenName="Posts" />
+                        /* <TouchableOpacity
+                            activeOpacity={0.8}
+                            style={styles.btn}
+                            onPress={() => {
+                                // navigation.navigate('Posts');
+                                navigation.goBack();
+                            }}
+                        >
+                            <Feather
+                                name="arrow-left"
+                                size={20}
+                                color={'rgba(33, 33, 33, 0.8'}
+                            />
+                        </TouchableOpacity>*/
+                    ),
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, size, color }) => (
                         <AntDesign
@@ -90,13 +139,13 @@ export const useRoute = isAuth => {
                             color={color}
                         />
                     ),
-                    tabBarActiveTintColor: '#fff',
+                    tabBarActiveTintColor: '#000',
                     tabBarInactiveTintColor: '#BDBDBD',
                     tabBarItemStyle: {
                         backgroundColor: '#FF6C00',
                         borderRadius: 20,
                     },
-                }}
+                })}
             />
             <MainTabs.Screen
                 name="Profiler"
@@ -116,11 +165,6 @@ export const useRoute = isAuth => {
                     tabBarInactiveTintColor: '#BDBDBD',
                 }}
             />
-            {/* <MainTabs.Screen
-                component={Home}
-                name="Home"
-                options={{ headerTitleAlign: 'center', headerShown: false }}
-            /> */}
         </MainTabs.Navigator>
     );
 };
@@ -132,5 +176,21 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         backgroundColor: '#FF6C00',
         color: '#fff',
+    },
+    title: {
+        fontWeight: 'bold',
+        color: '#212121',
+        paddingHorizontal: 16,
+        fontSize: 17,
+    },
+    btn: {
+        width: 30,
+        height: 30,
+        borderRadius: 20,
+        backgroundColor: '#ffffff',
+        color: '#BDBDBD',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginHorizontal: 16,
     },
 });
