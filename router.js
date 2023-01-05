@@ -47,7 +47,11 @@ export const useRoute = isAuth => {
                 <AuthStack.Screen
                     component={Home}
                     name="Home"
-                    // options={{ headerTitleAlign: 'center', headerShown: false }}
+                    options={{
+                        headerTitleAlign: 'center',
+                        headerShown: true,
+                        headerTitle: () => TextTitle('Публікaції'),
+                    }}
                 />
             </AuthStack.Navigator>
         );

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { AntDesign } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 
 export const GoToButton = ({ screenName }) => {
     const navigation = useNavigation();
@@ -9,11 +9,11 @@ export const GoToButton = ({ screenName }) => {
     const iconName = screenName => {
         switch (screenName) {
             case 'Posts':
-                return 'arrowleft';
+                return 'arrow-left';
             case 'Login':
-                return 'logout';
+                return 'log-out';
             default:
-                return 'logout';
+                return 'log-out';
         }
     };
 
@@ -25,7 +25,7 @@ export const GoToButton = ({ screenName }) => {
                 navigation.navigate(screenName);
             }}
         >
-            <AntDesign
+            <Feather
                 name={() => iconName(screenName)}
                 size={20}
                 color={'rgba(33, 33, 33, 0.8'}

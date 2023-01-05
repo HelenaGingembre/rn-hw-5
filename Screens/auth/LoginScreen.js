@@ -225,7 +225,6 @@ const styles = StyleSheet.create({
         right: 100,
         transform: [{ translateX: 100 }],
         padding: 16,
-        width: 71,
     },
     inputSection: {
         position: 'relative',
