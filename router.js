@@ -17,7 +17,7 @@ import { ProfileScreen } from './Screens/main/ProfileScreen';
 import { Home } from './Screens/main/Home';
 
 // icons import
-import { Feather, AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { Feather, AntDesign } from '@expo/vector-icons';
 import { GoToButton } from './components/goToButton';
 
 function TextTitle(text) {

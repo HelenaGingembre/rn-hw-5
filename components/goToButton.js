@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons';
 export const GoToButton = ({ screenName }) => {
     const navigation = useNavigation();
 
-    const iconName = screenName => {
+    let iconName = screenName => {
         switch (screenName) {
             case 'Posts':
                 return 'arrow-left';

@@ -18,6 +18,8 @@ export default function App() {
     const [fontsLoaded] = useFonts({
         'Roboto-Bold': require('./assets/fonts/Roboto/Roboto-Bold.ttf'),
         'Roboto-Regular': require('./assets/fonts/Roboto/Roboto-Regular.ttf'),
+        Feather: require('./assets/fonts/feather-webfont.ttf'),
+        AntDesign: require('./assets/fonts/AntDesign.ttf'),
     });
 
     const onFontsLoaded = useCallback(async () => {
