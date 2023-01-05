@@ -5,7 +5,7 @@ import { PostsScreen } from '../Screens/main/PostsScreen';
 import { Login } from '../Screens/auth/LoginScreen';
 import { useNavigation } from '@react-navigation/native';
 
-export const Header = ({ title, out, navigation: { navigate } }) => {
+export const Header = ({ title, out }) => {
     const navigation = useNavigation();
 
     return (
@@ -27,7 +27,10 @@ export const Header = ({ title, out, navigation: { navigate } }) => {
             <TouchableOpacity
                 activeOpacity={0.8}
                 style={styles.btn}
-                onPress={() => navigation.navigate(Login)}
+                onPress={() => {
+                    console.log('navigation', navigation);
+                    //navigation.goBack(Login);
+                }}
             >
                 <MaterialIcons
                     name="logout"

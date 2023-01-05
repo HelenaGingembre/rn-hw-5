@@ -9,10 +9,10 @@ import { Login } from '../../Screens/auth/LoginScreen';
 import photo1 from '../../assets/images/post_1.png';
 import photo2 from '../../assets/images/post_2.png';
 
-export const PostsScreen = ({ navigation }) => {
+export const PostsScreen = ({}) => {
     return (
         <View style={styles.container}>
-            <Header title="Публікaції" out={true} navigation={Login} />
+            <Header title="Публікaції" out={true} />
             <ScrollView style={styles.main}>
                 <User />
                 <Publication

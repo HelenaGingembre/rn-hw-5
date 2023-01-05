@@ -16,7 +16,7 @@ import { EvilIcons } from '@expo/vector-icons';
 import { Header } from '../../components/header';
 import { Login } from '../../Screens/auth/LoginScreen';
 
-export const CreatePostsScreen = ({ navigation }) => {
+export const CreatePostsScreen = () => {
     const [isKeyboardShow, setIsKeyboardShow] = useState(false);
 
     const keyBoardHide = () => {
@@ -26,7 +26,7 @@ export const CreatePostsScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={keyBoardHide}>
             <View style={styles.container}>
-                <Header title="Створити публікцію" navigation={'Login'} />
+                <Header title="Створити публікцію" />
                 <ScrollView style={styles.main}>
                     <View
                         style={{
