@@ -143,10 +143,10 @@ export const useRoute = isAuth => {
                             color={color}
                         />
                     ),
-                    tabBarActiveTintColor: '#000',
-                    tabBarInactiveTintColor: '#BDBDBD',
+                    tabBarActiveTintColor: 'rgba(33, 33, 33, 0.8)',
+                    // tabBarInactiveTintColor: '#FFF',
                     tabBarItemStyle: {
-                        backgroundColor: '#FF6C00',
+                        backgroundColor: '#FFF',
                         borderRadius: 20,
                     },
                 })}
@@ -180,6 +180,10 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         backgroundColor: '#FF6C00',
         color: '#fff',
+    },
+    focused: {
+        backgroundColor: '#FFF',
+        color: '#FF6C00',
     },
     title: {
         fontWeight: 'bold',

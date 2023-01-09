@@ -1,3 +1,10 @@
+# react native-hw-3
+
+✅ Подключить React Native Debugger в проект
+
+✅ Запустить React Native Debugger с проектом
+https://monosnap.com/file/VzyHGcRbswUGohXEMmzykWBvqFc6rC
+
 # react native-hw-4
 
 ✅ Создать экран PostsScreen
