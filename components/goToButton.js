@@ -5,17 +5,8 @@ import { Feather } from '@expo/vector-icons';
 
 export const GoToButton = ({ screenName }) => {
     const navigation = useNavigation();
-
-    let iconName = screenName => {
-        switch (screenName) {
-            case 'Posts':
-                return 'arrow-left';
-            case 'Login':
-                return 'log-out';
-            default:
-                return 'log-out';
-        }
-    };
+    const login = 'Login';
+    // const posts = 'Posts';
 
     return (
         <TouchableOpacity
@@ -26,7 +17,7 @@ export const GoToButton = ({ screenName }) => {
             }}
         >
             <Feather
-                name={() => iconName(screenName)}
+                name={screenName == login ? 'log-out' : 'arrow-left'}
                 size={20}
                 color={'rgba(33, 33, 33, 0.8'}
             />
