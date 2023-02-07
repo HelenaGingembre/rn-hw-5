@@ -12,9 +12,10 @@ import {
 } from 'react-native';
 
 import { EvilIcons } from '@expo/vector-icons';
+import { Camera } from 'expo-camera';
 
-import { Header } from '../../components/header';
-import { Login } from '../../Screens/auth/LoginScreen';
+// import { Header } from '../../components/header';
+// import { Login } from '../../Screens/auth/LoginScreen';
 
 export const CreatePostsScreen = () => {
     const [isKeyboardShow, setIsKeyboardShow] = useState(false);
@@ -34,7 +35,8 @@ export const CreatePostsScreen = () => {
                             marginBottom: isKeyboardShow ? 40 : 0,
                         }}
                     >
-                        <View style={styles.photoLayout}>
+                        {/* <View style={styles.photoLayout}> */}
+                        <Camera style={styles.photoLayout}>
                             <TouchableOpacity
                                 style={styles.photoLayoutBtn}
                                 activeOpacity={0.85}
@@ -46,7 +48,8 @@ export const CreatePostsScreen = () => {
                                     color="#BDBDBD"
                                 />
                             </TouchableOpacity>
-                        </View>
+                        </Camera>
+                        {/* </View> */}
 
                         <Text style={styles.downloadText}>
                             Завантажити фото
