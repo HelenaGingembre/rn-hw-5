@@ -9,29 +9,86 @@ import {
     ScrollView,
     TextInput,
     TouchableOpacity,
+    Button,
     Image,
 } from 'react-native';
 
-import { FontAwesome } from '@expo/vector-icons';
-import { Camera } from 'expo-camera';
+import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Camera, CameraType } from 'expo-camera';
+import * as MediaLibrary from 'expo-media-library';
+import * as Location from 'expo-location';
 
 // import { Header } from '../../components/header';
 // import { Login } from '../../Screens/auth/LoginScreen';
 
+const initialData = {
+    name: '',
+    place: '',
+};
+
 export const CreatePostsScreen = () => {
     const [isKeyboardShow, setIsKeyboardShow] = useState(false);
-    const [camera, setCamera] = useState(null);
+    const [data, setData] = useState(initialData);
+    const [permission, requestPermission] = Camera.useCameraPermissions();
+
+    const [type, setType] = useState(CameraType.back);
+    const [cameraRef, setCameraRef] = useState(null);
     const [photo, setPhoto] = useState(null);
+    const [location, setLocation] = useState(null);
 
     const keyBoardHide = () => {
-        Keyboard.dismiss();
         setIsKeyboardShow(false);
+        Keyboard.dismiss();
     };
 
     const takePhoto = async () => {
-        const photo = await camera.takePictureAsync();
-        setPhoto(photo.uri);
+        const location = await Location.getCurrentPositionAsync({});
+        setLocation({
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+        });
+        const photo = await cameraRef.takePictureAsync();
         console.log(' take a photo', photo);
+
+        if (photo.uri) {
+            setPhoto(photo.uri);
+        }
+    };
+
+    function toggleCameraType() {
+        setType(current =>
+            current === CameraType.back ? CameraType.front : CameraType.back
+        );
+    }
+
+    if (!permission) {
+        // Camera permissions are still loading
+        return <View />;
+    }
+
+    if (!permission.granted) {
+        // Camera permissions are not granted yet
+        return (
+            <View style={styles.permissionContainer}>
+                <Text style={{ textAlign: 'center' }}>
+                    We need your permission to show the camera
+                </Text>
+                <Button onPress={requestPermission} title="grant permission" />
+            </View>
+        );
+    }
+
+    const sendPhotoEndData = () => {
+        setIsKeyboardShow(false);
+        Keyboard.dismiss();
+        if (photo && location && data) {
+            setIsKeyboardShow(false);
+            setPhoto(null);
+            setLocation(null);
+            setData(initialData);
+            navigation.navigate('Posts', { photo, location, data });
+            console.log('create post');
+        }
     };
 
     return (
@@ -45,31 +102,47 @@ export const CreatePostsScreen = () => {
                             marginBottom: isKeyboardShow ? 40 : 0,
                         }}
                     >
-                        <Camera style={styles.photoLayout} ref={setCamera}>
-                            {photo && (
-                                <View style={styles.takePhotoContainer}>
-                                    <Image
-                                        source={{ uri: photo }}
-                                        style={{
-                                            height: 200,
-                                            width: 200,
-                                        }}
-                                    />
-                                </View>
-                            )}
-                            <TouchableOpacity
-                                style={styles.photoLayoutBtn}
-                                activeOpacity={0.85}
-                                onPress={takePhoto}
+                        {!isKeyboardShow && (
+                            <Camera
+                                style={styles.photoLayout}
+                                type={type}
+                                ref={setCameraRef}
                             >
-                                <FontAwesome
-                                    name="camera"
-                                    size={24}
-                                    // color="wight"
-                                    style={styles.photoIconBtn}
-                                />
-                            </TouchableOpacity>
-                        </Camera>
+                                {photo && (
+                                    <View style={styles.takePhotoContainer}>
+                                        <Image
+                                            source={{ uri: photo }}
+                                            style={{
+                                                height: 200,
+                                                width: 200,
+                                            }}
+                                        />
+                                    </View>
+                                )}
+                                <TouchableOpacity
+                                    style={styles.photoLayoutBtn}
+                                    activeOpacity={0.85}
+                                    onPress={takePhoto}
+                                >
+                                    <FontAwesome
+                                        name="camera"
+                                        size={24}
+                                        // color="wight"
+                                        style={styles.photoIconBtn}
+                                    />
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.flipButton}
+                                    onPress={toggleCameraType}
+                                >
+                                    <MaterialCommunityIcons
+                                        name="camera-flip"
+                                        size={14}
+                                        color="#BDBDBD"
+                                    />
+                                </TouchableOpacity>
+                            </Camera>
+                        )}
 
                         <Text style={styles.downloadText}>
                             Завантажити фото
@@ -85,7 +158,14 @@ export const CreatePostsScreen = () => {
                                     style={styles.input}
                                     onFocus={() => setIsKeyboardShow(true)}
                                     placeholder="Назва"
-                                    keyboardType="default"
+                                    // keyboardType="default"
+                                    value={data.name}
+                                    onChangeText={value =>
+                                        setData(prevState => ({
+                                            ...prevState,
+                                            name: value,
+                                        }))
+                                    }
                                 />
                             </View>
                             <View style={{ marginTop: 32 }}>
@@ -93,7 +173,14 @@ export const CreatePostsScreen = () => {
                                     style={styles.input}
                                     onFocus={() => setIsKeyboardShow(true)}
                                     placeholder="Місцевість"
-                                    keyboardType="default"
+                                    // keyboardType="default"
+                                    value={data.place}
+                                    onChangeText={value =>
+                                        setData(prevState => ({
+                                            ...prevState,
+                                            place: value,
+                                        }))
+                                    }
                                 />
                             </View>
                             <View>
@@ -101,9 +188,7 @@ export const CreatePostsScreen = () => {
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     style={styles.btn}
-                                    onPress={() => {
-                                        console.log('create post');
-                                    }}
+                                    onPress={sendPhotoEndData}
                                 >
                                     <Text style={styles.btnTitle}>
                                         Створити публікцію
@@ -119,6 +204,11 @@ export const CreatePostsScreen = () => {
 };
 
 const styles = StyleSheet.create({
+    permissionContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     container: {
         flex: 1,
         justifyContent: 'flex-start',
@@ -162,6 +252,15 @@ const styles = StyleSheet.create({
     },
     photoIconBtn: {
         color: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    flipButton: {
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        marginLeft: 0,
+        backgroundColor: '#FFFFFF',
         justifyContent: 'center',
         alignItems: 'center',
     },

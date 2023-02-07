@@ -1,11 +1,12 @@
 import { StyleSheet, Image, Text, View } from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
 
-export const Publication = ({ title, image, comments, location }) => {
+export const Publication = ({ title, place, image, comments, location }) => {
     return (
         <View style={styles.publication}>
-            <Image style={styles.img} source={image} />
+            <Image style={styles.img} source={{ uri: image }} />
             <Text style={styles.publicationTitle}>{title}</Text>
+            <Text style={styles.publicationTitle}>{place}</Text>
             <View
                 style={{
                     display: 'flex',
@@ -14,14 +15,23 @@ export const Publication = ({ title, image, comments, location }) => {
                     marginTop: 10,
                 }}
             >
-                <Text style={styles.comments}>
+                {/* <Text style={styles.comments}> */}
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Comments')}
+                >
                     <EvilIcons name="comment" size={24} color="#212121" />
                     {comments}
-                </Text>
-                <Text style={styles.location}>
+                </TouchableOpacity>
+                {/* </Text> */}
+                {/* <Text style={styles.location}> */}
+                <TouchableOpacity
+                    style={styles.location}
+                    onPress={() => navigation.navigate('Map', location)}
+                >
                     <EvilIcons name="location" size={24} color="#212121" />
-                    {location}
-                </Text>
+                    {place}
+                </TouchableOpacity>
+                {/* </Text> */}
             </View>
         </View>
     );

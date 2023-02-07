@@ -1,39 +1,47 @@
-import React from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, FlatList, ScrollView } from 'react-native';
 
-import { Header } from '../../components/header';
+// import { Header } from '../../components/header';
 import { User } from '../../components/user';
 import { Publication } from '../../components/publications';
 import { Login } from '../../Screens/auth/LoginScreen';
 
-import photo1 from '../../assets/images/post_1.png';
-import photo2 from '../../assets/images/post_2.png';
+// import photo1 from '../../assets/images/post_1.png';
+// import photo2 from '../../assets/images/post_2.png';
 
-export const PostsScreen = ({}) => {
+export const PostsScreen = ({ route, navigation }) => {
+    const [posts, setPosts] = useState([]);
+    useEffect(() => {
+        if (route.params) {
+            setPosts(prev => [...prev, route.params]);
+        }
+    }, [route.params]);
+    console.log(posts);
+
     return (
         <View style={styles.container}>
             {/* <Header title="Публікaції" out={true} /> */}
             <ScrollView style={styles.main}>
                 <User />
-                <Publication
-                    title={'Ліс'}
-                    image={photo1}
-                    comments={0}
-                    location={`Ivano-Frankivs'k Region, Ukraine`}
+                <FlatList
+                    data={posts}
+                    keyExtractor={(item, indx) => indx.toString()}
+                    renderItem={({ item }) => (
+                        <Publication
+                            title={item.data.name}
+                            place={item.data.place}
+                            image={item.photo}
+                            comments={0}
+                            location={item.location}
+                        />
+                    )}
                 />
-
-                <Publication
+                {/*<Publication
                     title={'Чорне море'}
                     image={photo2}
                     comments={0}
                     location={'Odessa, Ukraine'}
-                />
-
-                {/* {posts.map(({ id, image, title, comments, location }) =>
-					<Publication key={id} title={title}
-						image={image}
-						coments={comments}
-						location={location} />)} */}
+    />*/}
             </ScrollView>
         </View>
     );
