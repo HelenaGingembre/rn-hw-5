@@ -9,9 +9,10 @@ import {
     ScrollView,
     TextInput,
     TouchableOpacity,
+    Image,
 } from 'react-native';
 
-import { EvilIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 
 // import { Header } from '../../components/header';
@@ -19,11 +20,20 @@ import { Camera } from 'expo-camera';
 
 export const CreatePostsScreen = () => {
     const [isKeyboardShow, setIsKeyboardShow] = useState(false);
+    const [camera, setCamera] = useState(null);
+    const [photo, setPhoto] = useState(null);
 
     const keyBoardHide = () => {
         Keyboard.dismiss();
         setIsKeyboardShow(false);
     };
+
+    const takePhoto = async () => {
+        const photo = await camera.takePictureAsync();
+        setPhoto(photo.uri);
+        console.log(' take a photo', photo);
+    };
+
     return (
         <TouchableWithoutFeedback onPress={keyBoardHide}>
             <View style={styles.container}>
@@ -35,21 +45,31 @@ export const CreatePostsScreen = () => {
                             marginBottom: isKeyboardShow ? 40 : 0,
                         }}
                     >
-                        {/* <View style={styles.photoLayout}> */}
-                        <Camera style={styles.photoLayout}>
+                        <Camera style={styles.photoLayout} ref={setCamera}>
+                            {photo && (
+                                <View style={styles.takePhotoContainer}>
+                                    <Image
+                                        source={{ uri: photo }}
+                                        style={{
+                                            height: 200,
+                                            width: 200,
+                                        }}
+                                    />
+                                </View>
+                            )}
                             <TouchableOpacity
                                 style={styles.photoLayoutBtn}
                                 activeOpacity={0.85}
-                                onPress={() => console.log('take a photo')}
+                                onPress={takePhoto}
                             >
-                                <EvilIcons
+                                <FontAwesome
                                     name="camera"
                                     size={24}
-                                    color="#BDBDBD"
+                                    // color="wight"
+                                    style={styles.photoIconBtn}
                                 />
                             </TouchableOpacity>
                         </Camera>
-                        {/* </View> */}
 
                         <Text style={styles.downloadText}>
                             Завантажити фото
@@ -113,17 +133,35 @@ const styles = StyleSheet.create({
     photoLayout: {
         height: 240,
         backgroundColor: '#F6F6F6',
+
         borderWidth: 1,
         borderColor: '#E8E8E8',
         borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center',
     },
+    takePhotoContainer: {
+        position: 'absolute',
+        // flex: 1,
+        top: 5,
+        left: 5,
+        borderColor: '#fffC19',
+        borderWidth: 1,
+        borderRadius: 8,
+    },
     photoLayoutBtn: {
         width: 60,
         height: 60,
         borderRadius: 30,
-        backgroundColor: '#FFFFFF',
+        borderColor: '#BDBDBD',
+        borderWidth: 1,
+
+        opacity: 0.5,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    photoIconBtn: {
+        color: '#fff',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -131,7 +169,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto-Regular',
         fontSize: 16,
         marginTop: 8,
-
         color: '#BDBDBD',
     },
     form: {},
