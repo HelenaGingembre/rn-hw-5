@@ -10,7 +10,7 @@ import {
     FlatList,
 } from 'react-native';
 
-import { Publication } from '../../components/publications';
+// import { Publication } from '../../components/publications';
 import { PostsScreen } from './PostsScreen';
 
 import photo1 from '../../assets/images/post_1.png';
@@ -48,9 +48,9 @@ const POSTS = [
     },
 ];
 
-export const ProfileScreen = ({}) => {
-    const [posts, setPosts] = useState(POSTS);
-
+export const ProfileScreen = ({ route }) => {
+    // const [posts, setPosts] = useState(POSTS);
+    // console.log('route params', route.params);
     return (
         <View style={styles.container}>
             <ImageBackground
@@ -66,7 +66,8 @@ export const ProfileScreen = ({}) => {
                     </View>
                     <Text style={styles.textUser}>Olena Gingembre</Text>
                     <ScrollView style={styles.main}>
-                        <Publication
+                        <PostsScreen />
+                        {/* <Publication
                             title={'Ліс'}
                             image={photo1}
                             comments={0}
@@ -83,7 +84,7 @@ export const ProfileScreen = ({}) => {
                             image={photo3}
                             comments={0}
                             location={`Ivano-Frankivs'k Region, Ukraine`}
-                        />
+                        /> */}
                     </ScrollView>
                 </View>
 

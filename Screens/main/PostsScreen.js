@@ -11,17 +11,19 @@ import { Login } from '../../Screens/auth/LoginScreen';
 
 export const PostsScreen = ({ route, navigation }) => {
     const [posts, setPosts] = useState([]);
-    useEffect(() => {
-        if (route.params) {
-            setPosts(prev => [...prev, route.params]);
-        }
-    }, [route.params]);
-    console.log(posts);
+    console.log('route.params--->', route.params);
+
+    // useEffect(() => {
+    //     if (route.params) {
+    //         setPosts(prev => [...prev, route.params]);
+    //     }
+    // }, [route.params]);
+    console.log('posts : ', posts);
 
     return (
         <View style={styles.container}>
-            {/* <Header title="Публікaції" out={true} /> */}
-            <ScrollView style={styles.main}>
+            {/* <ScrollView style={styles.main}> */}
+            <View style={styles.main}>
                 <User />
                 <FlatList
                     data={posts}
@@ -42,7 +44,8 @@ export const PostsScreen = ({ route, navigation }) => {
                     comments={0}
                     location={'Odessa, Ukraine'}
     />*/}
-            </ScrollView>
+            </View>
+            {/* </ScrollView> */}
         </View>
     );
 };

@@ -26,7 +26,7 @@ const initialData = {
     place: '',
 };
 
-export const CreatePostsScreen = () => {
+export const CreatePostsScreen = ({ navigation }) => {
     const [isKeyboardShow, setIsKeyboardShow] = useState(false);
     const [data, setData] = useState(initialData);
     const [permission, requestPermission] = Camera.useCameraPermissions();
@@ -42,11 +42,11 @@ export const CreatePostsScreen = () => {
     };
 
     const takePhoto = async () => {
-        const location = await Location.getCurrentPositionAsync({});
-        setLocation({
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
-        });
+        // const location = await Location.getCurrentPositionAsync({});
+        // setLocation({
+        //     latitude: location.coords.latitude,
+        //     longitude: location.coords.longitude,
+        // });
         const photo = await cameraRef.takePictureAsync();
         console.log(' take a photo', photo);
 
@@ -81,11 +81,12 @@ export const CreatePostsScreen = () => {
     const sendPhotoEndData = () => {
         setIsKeyboardShow(false);
         Keyboard.dismiss();
-        if (photo && location && data) {
+        if (photo /*&& location*/ && data) {
             setIsKeyboardShow(false);
             setPhoto(null);
             setLocation(null);
             setData(initialData);
+            console.log('navigation----->', navigation);
             navigation.navigate('Posts', { photo, location, data });
             console.log('create post');
         }
@@ -113,8 +114,8 @@ export const CreatePostsScreen = () => {
                                         <Image
                                             source={{ uri: photo }}
                                             style={{
-                                                height: 200,
-                                                width: 200,
+                                                height: 220,
+                                                width: 360,
                                             }}
                                         />
                                     </View>
@@ -127,18 +128,17 @@ export const CreatePostsScreen = () => {
                                     <FontAwesome
                                         name="camera"
                                         size={24}
-                                        // color="wight"
                                         style={styles.photoIconBtn}
                                     />
                                 </TouchableOpacity>
                                 <TouchableOpacity
-                                    style={styles.flipButton}
+                                    style={styles.photoLayoutBtn}
                                     onPress={toggleCameraType}
                                 >
                                     <MaterialCommunityIcons
                                         name="camera-flip"
-                                        size={14}
-                                        color="#BDBDBD"
+                                        size={24}
+                                        style={styles.photoIconBtn}
                                     />
                                 </TouchableOpacity>
                             </Camera>
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     },
     takePhotoContainer: {
         position: 'absolute',
-        // flex: 1,
+        flex: 1,
         top: 5,
         left: 5,
         borderColor: '#fffC19',
@@ -245,22 +245,12 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         borderColor: '#BDBDBD',
         borderWidth: 1,
-
         opacity: 0.5,
         justifyContent: 'center',
         alignItems: 'center',
     },
     photoIconBtn: {
         color: '#fff',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    flipButton: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        marginLeft: 0,
-        backgroundColor: '#FFFFFF',
         justifyContent: 'center',
         alignItems: 'center',
     },

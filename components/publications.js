@@ -49,18 +49,18 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     publicationTitle: {
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontSize: 16,
         marginTop: 8,
         color: '#212121',
     },
     comments: {
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontSize: 16,
         color: '#BDBDBD',
     },
     location: {
-        fontFamily: 'Roboto',
+        // fontFamily: 'Roboto',
         fontSize: 16,
         textDecorationLine: 'underline',
         color: '#212121',
