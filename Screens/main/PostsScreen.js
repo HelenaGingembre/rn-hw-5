@@ -13,11 +13,11 @@ export const PostsScreen = ({ route, navigation }) => {
     const [posts, setPosts] = useState([]);
     console.log('route.params--->', route.params);
 
-    // useEffect(() => {
-    //     if (route.params) {
-    //         setPosts(prev => [...prev, route.params]);
-    //     }
-    // }, [route.params]);
+    useEffect(() => {
+        if (route.params) {
+            setPosts(prev => [...prev, route.params]);
+        }
+    }, [route.params]);
     console.log('posts : ', posts);
 
     return (
@@ -30,8 +30,8 @@ export const PostsScreen = ({ route, navigation }) => {
                     keyExtractor={(item, indx) => indx.toString()}
                     renderItem={({ item }) => (
                         <Publication
-                            title={item.data.name}
-                            place={item.data.place}
+                            title={item.name}
+                            place={item.place}
                             image={item.photo}
                             comments={0}
                             location={item.location}
