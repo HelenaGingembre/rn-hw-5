@@ -2,11 +2,21 @@ import { StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
 
 export const Publication = ({ title, place, image, comments, location }) => {
+    console.log(
+        'data title:',
+        title,
+        'data place:',
+        place,
+        'data image:',
+        image,
+        comments,
+        location
+    );
     return (
         <View style={styles.publication}>
             <Image style={styles.img} source={{ uri: image }} />
             <Text style={styles.publicationTitle}>{title}</Text>
-            <Text style={styles.publicationTitle}>{place}</Text>
+            {/* <Text style={styles.publicationTitle}>{place}</Text> */}
             <View
                 style={{
                     display: 'flex',
@@ -15,21 +25,20 @@ export const Publication = ({ title, place, image, comments, location }) => {
                     marginTop: 10,
                 }}
             >
-                {/* <Text style={styles.comments}> */}
                 <TouchableOpacity
+                    style={styles.comments}
                     onPress={() => navigation.navigate('Comments')}
                 >
                     <EvilIcons name="comment" size={24} color="#212121" />
-                    <Text style={styles.comments}> {comments}</Text>
+                    <Text> {comments}</Text>
                 </TouchableOpacity>
-                {/* </Text> */}
-                {/* <Text style={styles.location}> */}
+
                 <TouchableOpacity
                     style={styles.location}
                     onPress={() => navigation.navigate('Map', location)}
                 >
                     <EvilIcons name="location" size={24} color="#212121" />
-                    <Text style={styles.location}> {place}</Text>
+                    <Text> {place}</Text>
                 </TouchableOpacity>
                 {/* </Text> */}
             </View>
@@ -49,20 +58,21 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     publicationTitle: {
-        // fontFamily: 'Roboto',
+        fontFamily: 'Roboto',
         fontSize: 16,
         marginTop: 8,
-        color: '#212121',
+        color: '#BDBDBD',
     },
     comments: {
-        // fontFamily: 'Roboto',
+        fontFamily: 'Roboto',
         fontSize: 16,
         color: '#BDBDBD',
     },
     location: {
-        // fontFamily: 'Roboto',
+        fontFamily: 'Roboto',
         fontSize: 16,
-        textDecorationLine: 'underline',
-        color: '#212121',
+        justifyContent: 'flex-end',
+        // textDecorationLine: 'underline',
+        color: '#BDBDBD',
     },
 });

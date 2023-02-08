@@ -18,11 +18,10 @@ export const PostsScreen = ({ route, navigation }) => {
             setPosts(prev => [...prev, route.params]);
         }
     }, [route.params]);
-    console.log('posts : ', posts);
+    // console.log('posts : ', posts);
 
     return (
         <View style={styles.container}>
-            {/* <ScrollView style={styles.main}> */}
             <View style={styles.main}>
                 <User />
                 <FlatList
@@ -30,22 +29,16 @@ export const PostsScreen = ({ route, navigation }) => {
                     keyExtractor={(item, indx) => indx.toString()}
                     renderItem={({ item }) => (
                         <Publication
-                            title={item.name}
-                            place={item.place}
+                            key={item.id}
+                            title={item.data.name}
+                            place={item.data.place}
                             image={item.photo}
                             comments={0}
                             location={item.location}
                         />
                     )}
                 />
-                {/*<Publication
-                    title={'Чорне море'}
-                    image={photo2}
-                    comments={0}
-                    location={'Odessa, Ukraine'}
-    />*/}
             </View>
-            {/* </ScrollView> */}
         </View>
     );
 };

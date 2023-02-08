@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet,
     View,
     Image,
-    ScrollView,
     Text,
-    SafeAreaView,
     ImageBackground,
     FlatList,
 } from 'react-native';
+import { Publication } from '../../components/publications';
+// import { PostsScreen } from './PostsScreen';
 
-// import { Publication } from '../../components/publications';
-import { PostsScreen } from './PostsScreen';
-
-import photo1 from '../../assets/images/post_1.png';
-import photo2 from '../../assets/images/post_2.png';
-import photo3 from '../../assets/images/post_3.png';
-
+// import photo1 from '../../assets/images/post_1.png';
+// import photo2 from '../../assets/images/post_2.png';
+// import photo3 from '../../assets/images/post_3.png';
+/*
 const POSTS = [
     {
         id: '45k6-j54k-4jth',
@@ -47,10 +44,17 @@ const POSTS = [
         location: 'Lviv, Ukraine',
     },
 ];
+*/
 
 export const ProfileScreen = ({ route }) => {
-    // const [posts, setPosts] = useState(POSTS);
+    const [posts, setPosts] = useState([]);
     // console.log('route params', route.params);
+    useEffect(() => {
+        if (route.params) {
+            setPosts(prevState => [...prevState, route.params]);
+        }
+    }, [route.params]);
+
     return (
         <View style={styles.container}>
             <ImageBackground
@@ -65,46 +69,23 @@ export const ProfileScreen = ({ route }) => {
                         ></Image>
                     </View>
                     <Text style={styles.textUser}>Olena Gingembre</Text>
-                    <ScrollView style={styles.main}>
-                        <PostsScreen />
-                        {/* <Publication
-                            title={'Ліс'}
-                            image={photo1}
-                            comments={0}
-                            location={`Ivano-Frankivs'k Region, Ukraine`}
+                    <View style={styles.main}>
+                        <FlatList
+                            data={posts}
+                            keyExtractor={(item, indx) => indx.toString()}
+                            renderItem={({ item }) => (
+                                <Publication
+                                    // key={item.id}
+                                    title={item.data.name}
+                                    place={item.data.place}
+                                    image={item.photo}
+                                    comments={0}
+                                    location={item.location}
+                                />
+                            )}
                         />
-                        <Publication
-                            title={'Чорне море'}
-                            image={photo2}
-                            comments={0}
-                            location={'Odessa, Ukraine'}
-                        />
-                        <Publication
-                            title={'Ліс'}
-                            image={photo3}
-                            comments={0}
-                            location={`Ivano-Frankivs'k Region, Ukraine`}
-                        /> */}
-                    </ScrollView>
+                    </View>
                 </View>
-
-                {/* <ScrollView></ScrollView> */}
-
-                {/* <SafeAreaView style={styles.main}>
-                    <FlatList
-                        data={posts}
-                        renderItem={({ item }) => {
-                            <Publication
-                                key={item.id}
-                                title={item.title}
-                                image={item.image}
-                                comments={item.comments}
-                                location={item.location}
-                            />;
-                        }}
-                        keyExtractor={item => item.id}
-                    />
-                </SafeAreaView>*/}
             </ImageBackground>
         </View>
     );
