@@ -1,57 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList, ScrollView } from 'react-native';
+import React from 'react';
+import { moduleName } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-// import { Header } from '../../components/header';
-import { User } from '../../components/user';
-import { Publication } from '../../components/publications';
-import { Login } from '../../Screens/auth/LoginScreen';
+import { DefaultScreenPosts } from '../nested/DefaultScreenPosts';
+import { CommentsScreen } from '../nested/CommentsScreen';
+import { MapScreen } from '../nested/MapScreen';
 
-// import photo1 from '../../assets/images/post_1.png';
-// import photo2 from '../../assets/images/post_2.png';
+// const NestedScreen = createStackNavigator();
+const NestedScreen = createNativeStackNavigator();
 
 export const PostsScreen = ({ route, navigation }) => {
-    const [posts, setPosts] = useState([]);
-    console.log('route.params--->', route.params);
-
-    useEffect(() => {
-        if (route.params) {
-            setPosts(prev => [...prev, route.params]);
-        }
-    }, [route.params]);
-    // console.log('posts : ', posts);
+    console.log('route-PostsScreen--', route);
 
     return (
-        <View style={styles.container}>
-            <View style={styles.main}>
-                <User />
-                <FlatList
-                    data={posts}
-                    keyExtractor={(item, indx) => indx.toString()}
-                    renderItem={({ item }) => (
-                        <Publication
-                            key={item.id}
-                            title={item.data.name}
-                            place={item.data.place}
-                            image={item.photo}
-                            comments={0}
-                            location={item.location}
-                        />
-                    )}
-                />
-            </View>
-        </View>
+        <NestedScreen.Navigator initialRouteName="DefaultScreen">
+            <NestedScreen.Screen
+                name="DefaultScreen"
+                component={DefaultScreenPosts}
+                options={({ route, navigation }) => ({
+                    headerShown: false,
+                })}
+            />
+            <NestedScreen.Screen name="Comments" component={CommentsScreen} />
+            <NestedScreen.Screen name="Map" component={MapScreen} />
+        </NestedScreen.Navigator>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'flex-start',
-    },
-    main: {
-        display: 'flex',
-        flexDirection: 'column',
-        paddingTop: 30,
-        paddingHorizontal: 16,
-    },
-});

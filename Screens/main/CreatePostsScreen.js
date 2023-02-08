@@ -42,7 +42,8 @@ export const CreatePostsScreen = ({ navigation }) => {
     };
 
     const takePhoto = async () => {
-        // const location = await Location.getCurrentPositionAsync({});
+        const location = await Location.getCurrentPositionAsync({});
+        setLocation(location);
         // setLocation({
         //     latitude: location.coords.latitude,
         //     longitude: location.coords.longitude,
@@ -87,7 +88,7 @@ export const CreatePostsScreen = ({ navigation }) => {
             setLocation(null);
             setData(initialData);
             console.log('navigation----->', navigation);
-            navigation.navigate('Posts', { photo, location, data });
+            navigation.navigate('DefaultScreen', { photo, location, data });
             console.log('create post');
         }
     };
