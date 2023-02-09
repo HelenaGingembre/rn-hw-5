@@ -10,7 +10,9 @@ import { Publication } from '../../components/publications';
 
 export const DefaultScreenPosts = ({ route, navigation }) => {
     const [posts, setPosts] = useState([]);
-    console.log('route.params--->', route.params);
+    console.log('navigation--->', navigation.navigate('Posts'));
+    console.log('route--->', route);
+    console.log('route.params Default Screen--->', route.params);
 
     useEffect(() => {
         if (route.params) {
@@ -34,6 +36,7 @@ export const DefaultScreenPosts = ({ route, navigation }) => {
                             image={item.photo}
                             comments={0}
                             location={item.location}
+                            navigation={navigation}
                         />
                     )}
                 />

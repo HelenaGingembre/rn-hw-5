@@ -1,7 +1,14 @@
 import { StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
 
-export const Publication = ({ title, place, image, comments, location }) => {
+export const Publication = ({
+    navigation,
+    title,
+    place,
+    image,
+    comments,
+    location,
+}) => {
     console.log(
         'data title:',
         title,
@@ -35,7 +42,7 @@ export const Publication = ({ title, place, image, comments, location }) => {
 
                 <TouchableOpacity
                     style={styles.location}
-                    onPress={() => navigation.navigate('Map', location)}
+                    onPress={() => navigation.navigate('Map')}
                 >
                     <EvilIcons name="location" size={24} color="#212121" />
                     <Text> {place}</Text>
@@ -58,18 +65,18 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     publicationTitle: {
-        fontFamily: 'Roboto',
+        fontFamily: 'Roboto-Regular',
         fontSize: 16,
         marginTop: 8,
         color: '#BDBDBD',
     },
     comments: {
-        fontFamily: 'Roboto',
+        fontFamily: 'Roboto-Regular',
         fontSize: 16,
         color: '#BDBDBD',
     },
     location: {
-        fontFamily: 'Roboto',
+        fontFamily: 'Roboto-Regular',
         fontSize: 16,
         justifyContent: 'flex-end',
         // textDecorationLine: 'underline',

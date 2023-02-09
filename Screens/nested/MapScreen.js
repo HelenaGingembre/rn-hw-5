@@ -3,10 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 
-export const MapScreen = ({ route }) => {
-    {
-        /*
-    
+export const MapScreen = ({ route, navigation }) => {
     const [location, setLocation] = useState({ route });
 
     useEffect(() => {
@@ -24,12 +21,11 @@ export const MapScreen = ({ route }) => {
             setLocation(coords);
         })();
     }, []);
-*/
-    }
+
     // console.log('location----->', location);
 
-    console.log('route.params.location', route.params.location);
-    const { longitude, latitude } = route.params.location;
+    // console.log('route.params.location', route.params.location);
+    // const { longitude, latitude } = route.params.location;
 
     return (
         <View style={styles.container}>
@@ -37,8 +33,10 @@ export const MapScreen = ({ route }) => {
                 <MapView
                     style={styles.mapStyle}
                     initialRegion={{
-                        longitude: longitude,
-                        latitude: latitude,
+                        ...location,
+
+                        // longitude: longitude,
+                        // latitude: latitude,
                         // longitude: location.longitude,
                         // latitude: location.latitude,
                         longitudeDelta: 0.01,
@@ -50,8 +48,9 @@ export const MapScreen = ({ route }) => {
                         <Marker
                             title="Travel photo"
                             coordinate={{
-                                longitude,
-                                latitude,
+                                ...location,
+                                // longitude,
+                                // latitude,
                                 // longitude: location.longitude,
                                 // latitude: location.latitude,
                             }}

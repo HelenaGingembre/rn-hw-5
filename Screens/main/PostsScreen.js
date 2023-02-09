@@ -10,15 +10,18 @@ import { MapScreen } from '../nested/MapScreen';
 // const NestedScreen = createStackNavigator();
 const NestedScreen = createNativeStackNavigator();
 
-export const PostsScreen = ({ route, navigation }) => {
-    console.log('route-PostsScreen--', route);
+export const PostsScreen = ({ navigation }) => {
+    // console.log(
+    //     'navigation-PostsScreen--',
+    //     navigation.navigate('DefaultScreen')
+    // );
 
     return (
         <NestedScreen.Navigator initialRouteName="DefaultScreen">
             <NestedScreen.Screen
                 name="DefaultScreen"
                 component={DefaultScreenPosts}
-                options={({ route, navigation }) => ({
+                options={({ navigation }) => ({
                     headerShown: false,
                 })}
             />

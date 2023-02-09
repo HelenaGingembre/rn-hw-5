@@ -6,7 +6,8 @@ import { StyleSheet } from 'react-native';
 import { PostsScreen } from './PostsScreen';
 // import { User } from '../../components/user';
 
-export const Home = () => {
+export const Home = ({ navigation }) => {
+    console.log('navigation', navigation);
     return <PostsScreen />;
 };
 

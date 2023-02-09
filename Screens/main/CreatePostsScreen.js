@@ -42,12 +42,14 @@ export const CreatePostsScreen = ({ navigation }) => {
     };
 
     const takePhoto = async () => {
-        const location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
-        // setLocation({
-        //     latitude: location.coords.latitude,
-        //     longitude: location.coords.longitude,
-        // });
+        /* const location = await Location.getCurrentPositionAsync({});
+
+        console.log('location', location);
+        // setLocation(location);
+        setLocation({
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+        });*/
         const photo = await cameraRef.takePictureAsync();
         console.log(' take a photo', photo);
 
@@ -82,15 +84,22 @@ export const CreatePostsScreen = ({ navigation }) => {
     const sendPhotoEndData = () => {
         setIsKeyboardShow(false);
         Keyboard.dismiss();
-        if (photo /*&& location*/ && data) {
+        if (photo /* && location*/ && data) {
             setIsKeyboardShow(false);
             setPhoto(null);
             setLocation(null);
             setData(initialData);
-            console.log('navigation----->', navigation);
+            console.log('{ photo, location, data }----->', {
+                photo,
+                location,
+                data,
+            });
+            // console.log('navigation----->', navigation);
             navigation.navigate('DefaultScreen', { photo, location, data });
             console.log('create post');
         }
+
+        console.log('photo, location, data = form data cannot be empty');
     };
 
     return (
