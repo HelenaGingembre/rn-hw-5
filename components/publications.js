@@ -34,7 +34,13 @@ export const Publication = ({
             >
                 <TouchableOpacity
                     style={styles.comments}
-                    onPress={() => navigation.navigate('Comments', comments)}
+                    onPress={() =>
+                        navigation.navigate('Comments', {
+                            comments,
+                            image,
+                            title,
+                        })
+                    }
                 >
                     <EvilIcons name="comment" size={24} color="#212121" />
                     <Text> {comments}</Text>
