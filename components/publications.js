@@ -34,7 +34,7 @@ export const Publication = ({
             >
                 <TouchableOpacity
                     style={styles.comments}
-                    onPress={() => navigation.navigate('Comments')}
+                    onPress={() => navigation.navigate('Comments', comments)}
                 >
                     <EvilIcons name="comment" size={24} color="#212121" />
                     <Text> {comments}</Text>
@@ -47,7 +47,6 @@ export const Publication = ({
                     <EvilIcons name="location" size={24} color="#212121" />
                     <Text> {place}</Text>
                 </TouchableOpacity>
-                {/* </Text> */}
             </View>
         </View>
     );

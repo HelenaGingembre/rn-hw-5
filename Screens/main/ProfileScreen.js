@@ -46,9 +46,9 @@ const POSTS = [
 ];
 */
 
-export const ProfileScreen = ({ route }) => {
+export const ProfileScreen = ({ route, navigation }) => {
     const [posts, setPosts] = useState([]);
-    // console.log('route params', route.params);
+    console.log('route params ProfileScreen---->', route.params);
     useEffect(() => {
         if (route.params) {
             setPosts(prevState => [...prevState, route.params]);
@@ -81,6 +81,7 @@ export const ProfileScreen = ({ route }) => {
                                     image={item.photo}
                                     comments={0}
                                     location={item.location}
+                                    navigation={navigation}
                                 />
                             )}
                         />
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
     },
     textUser: {
         color: '#212121',
-        fontFamily: 'Roboto',
+        fontFamily: 'Roboto-Regular',
         fontSize: 30,
         fontWeight: '500',
         textAlign: 'center',

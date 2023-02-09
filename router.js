@@ -154,7 +154,7 @@ export const useRoute = isAuth => {
             <MainTabs.Screen
                 name="Profiler"
                 component={ProfileScreen}
-                options={{
+                options={({ navigation }) => ({
                     headerShown: false,
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, size, color }) => (
@@ -167,7 +167,7 @@ export const useRoute = isAuth => {
                     ),
                     tabBarActiveTintColor: '#FF6C00',
                     tabBarInactiveTintColor: '#BDBDBD',
-                }}
+                })}
             />
         </MainTabs.Navigator>
     );

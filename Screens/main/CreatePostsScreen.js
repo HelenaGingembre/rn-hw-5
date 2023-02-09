@@ -13,7 +13,11 @@ import {
     Image,
 } from 'react-native';
 
-import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import {
+    FontAwesome,
+    MaterialCommunityIcons,
+    EvilIcons,
+} from '@expo/vector-icons';
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import * as Location from 'expo-location';
@@ -35,6 +39,7 @@ export const CreatePostsScreen = ({ navigation }) => {
     const [cameraRef, setCameraRef] = useState(null);
     const [photo, setPhoto] = useState(null);
     const [location, setLocation] = useState(null);
+    // const [regionName, setRegionName] = useState(null);
 
     const keyBoardHide = () => {
         setIsKeyboardShow(false);
@@ -42,14 +47,14 @@ export const CreatePostsScreen = ({ navigation }) => {
     };
 
     const takePhoto = async () => {
-        /* const location = await Location.getCurrentPositionAsync({});
+        const location = await Location.getCurrentPositionAsync({});
 
         console.log('location', location);
         // setLocation(location);
         setLocation({
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
-        });*/
+        });
         const photo = await cameraRef.takePictureAsync();
         console.log(' take a photo', photo);
 
@@ -84,7 +89,7 @@ export const CreatePostsScreen = ({ navigation }) => {
     const sendPhotoEndData = () => {
         setIsKeyboardShow(false);
         Keyboard.dismiss();
-        if (photo /* && location*/ && data) {
+        if (photo && location && data) {
             setIsKeyboardShow(false);
             setPhoto(null);
             setLocation(null);
@@ -179,6 +184,18 @@ export const CreatePostsScreen = ({ navigation }) => {
                                 />
                             </View>
                             <View style={{ marginTop: 32 }}>
+                                <TouchableOpacity
+                                    style={styles.location}
+                                    onPress={() =>
+                                        navigation.navigate('Map', location)
+                                    }
+                                >
+                                    <EvilIcons
+                                        name="location"
+                                        size={24}
+                                        color="#212121"
+                                    />
+                                </TouchableOpacity>
                                 <TextInput
                                     style={styles.input}
                                     onFocus={() => setIsKeyboardShow(true)}
@@ -191,6 +208,12 @@ export const CreatePostsScreen = ({ navigation }) => {
                                             place: value,
                                         }))
                                     }
+                                    //value={
+                                    //   regionName
+                                    //       ? `${regionName[0].city}, ${regionName[0].country}`
+                                    //       : ''
+                                    // }
+                                    //textContentType={'location'}
                                 />
                             </View>
                             <View>

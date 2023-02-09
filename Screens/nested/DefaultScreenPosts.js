@@ -34,7 +34,7 @@ export const DefaultScreenPosts = ({ route, navigation }) => {
                             title={item.data.name}
                             place={item.data.place}
                             image={item.photo}
-                            comments={0}
+                            comments={item.comments}
                             location={item.location}
                             navigation={navigation}
                         />

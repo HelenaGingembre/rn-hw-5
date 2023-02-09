@@ -49,8 +49,7 @@ export const MapScreen = ({ route, navigation }) => {
                             title="Travel photo"
                             coordinate={{
                                 ...location,
-                                // longitude,
-                                // latitude,
+
                                 // longitude: location.longitude,
                                 // latitude: location.latitude,
                             }}
