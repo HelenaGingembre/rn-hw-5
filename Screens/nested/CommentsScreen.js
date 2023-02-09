@@ -9,9 +9,14 @@ import {
     TouchableOpacity,
     TextInput,
     Button,
+    Dimensions,
 } from 'react-native';
 
 export const CommentsScreen = ({ route }) => {
+    const [windowWidth, setWindowWidth] = useState(
+        Dimensions.get('window').width
+    );
+
     const [allComments, setAllComments] = useState([]);
 
     const [comment, setComment] = useState('');
@@ -27,7 +32,7 @@ export const CommentsScreen = ({ route }) => {
         <View style={styles.container}>
             <Text>CommentsScreen</Text>
 
-            <View style={styles.container}>
+            <View style={{ width: windowWidth - 16 * 2 }}>
                 <FlatList
                     removeClippedSubviews={false}
                     showsVerticalScrollIndicator={false}
@@ -35,6 +40,7 @@ export const CommentsScreen = ({ route }) => {
                         <View
                             style={{
                                 ...styles.container,
+                                width: windowWidth - 16 * 2,
                             }}
                         >
                             <Image
@@ -65,12 +71,13 @@ export const CommentsScreen = ({ route }) => {
                             </TouchableOpacity>
                         </View>
                     }
-                    contentContainerStyle={{ width: '100%' }}
+                    contentContainerStyle={{ width: windowWidth - 16 * 2 }}
                     data={allComments}
                     renderItem={({ item }) => (
                         <View
                             style={{
                                 ...styles.commentWrapper,
+                                width: windowWidth - 28 - 16 * 3,
                             }}
                         >
                             <Image
